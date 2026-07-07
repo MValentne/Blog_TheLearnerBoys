@@ -2,3 +2,9 @@ baseURL = 'https://example.org/'
 locale = 'en-us'
 title = 'The Learner Boys'
 theme = "hugo-theme-nostyleplease"
+
+# Categorias y etiquetas de post
+[taxonomies]
+    tag = "tags"
+    category = "categories"
+    author = "authors"

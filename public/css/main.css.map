@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "/home/valentino/Desktop/Blog_Project",
+	"sourceRoot": "/home/valentinomende/Desktop/Blog_TheLearnerBoys",
 	"sources": [
 		"themes/hugo-theme-nostyleplease/assets/css/main.scss"
 	],
