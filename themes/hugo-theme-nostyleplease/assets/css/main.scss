@@ -179,3 +179,39 @@ details[open] summary {
 .toc {
   padding: 1rem;
 }
+
+.categories-box {
+  border: 1px solid currentColor;
+  padding: 10px 15px;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.categories-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.categories-list li {
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categories-list li a {
+  text-decoration: none;
+}
+
+.categories-list li a:hover {
+  text-decoration: underline;
+}
+
+.category-count {
+  opacity: 0.6;
+  font-size: 0.9em;
+}

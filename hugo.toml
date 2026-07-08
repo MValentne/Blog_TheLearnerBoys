@@ -5,6 +5,6 @@ theme = "hugo-theme-nostyleplease"
 
 # Categorias y etiquetas de post
 [taxonomies]
-    tag = "tags"
+    keyword = "keywords"
     category = "categories"
     author = "authors"

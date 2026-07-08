@@ -3,8 +3,8 @@ date = '2026-07-05T19:59:13-03:00'
 draft = true
 title = 'Firstpost'
 author = 'Valen'
-tag = ["tag1", "tag2"]
-category = ["testing", "testing2"]
+keyword = ["keyword1", "keyword2"]
+categories = ["testing", "testing2"]
 +++
 
 # Lorem Ipsum

@@ -2,7 +2,7 @@
 title = "info"
 
   [[entries.entries]]
-  title = "a (nearly) no-CSS, fast, minimalist Hugo theme ported from <a href='https://github.com/riggraz/no-style-please'>riggraz/no-style-please</a>."
+  title = "CHANGE THIS CHANGE THIS a (nearly) no-CSS, fast, minimalist Hugo theme ported from <a href='https://github.com/riggraz/no-style-please'>riggraz/no-style-please</a>."
 
   [[entries.entries]]
   title = "github repo"
@@ -10,7 +10,7 @@ title = "info"
 
 
 [[entries]]
-title = "all posts"
+title = "recent posts"
 
   [entries.post_list]
   limit = 5
@@ -19,13 +19,8 @@ title = "all posts"
   show_more_url = "posts"
 
 [[entries]]
-title = "posts by category"
-
-  [entries.post_list]
-  section = "posts"
-  show_more = true
-  show_more_text = "See more posts..."
-  show_more_url = "posts"
+title = "categories"
+show_categories = true
 
 [[entries]]
 title = "rss"
