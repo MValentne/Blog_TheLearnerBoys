@@ -1,6 +1,6 @@
 +++
 date = '2026-07-05T19:59:13-03:00'
-draft = true
+draft = false
 title = 'Firstpost'
 author = 'Valen'
 keyword = ["keyword1", "keyword2"]
