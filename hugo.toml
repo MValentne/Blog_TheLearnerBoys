@@ -8,3 +8,8 @@ theme = "hugo-theme-nostyleplease"
     keyword = "keywords"
     category = "categories"
     author = "authors"
+
+# Lo hago inseguro, es estatico y de colaboracion cerrada.
+# Nos permite meter html en medio del markdown, GIFS LOQUISIMOS
+[markup.goldmark.renderer]
+    unsafe = true
