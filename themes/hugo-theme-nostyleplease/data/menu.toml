@@ -2,11 +2,11 @@
 title = "info"
 
   [[entries.entries]]
-  title = "CHANGE THIS CHANGE THIS a (nearly) no-CSS, fast, minimalist Hugo theme ported from <a href='https://github.com/riggraz/no-style-please'>riggraz/no-style-please</a>."
+  title = "Somos un grupo de amigos que decidimos armar este espacio para compartir lo que se nos ocurra: proyectos, ideas, gustos, y todo lo que vaya surgiendo en el camino. No hay un tema fijo — cada uno aporta lo suyo."
 
   [[entries.entries]]
-  title = "github repo"
-  url = "https://github.com/hanwenguo/hugo-theme-nostyleplease"
+  title = "[github repo]"
+  url = "https://github.com/MValentne/Blog_TheLearnerBoys"
 
 
 [[entries]]
@@ -22,25 +22,25 @@ title = "recent posts"
 title = "categories"
 show_categories = true
 
-[[entries]]
-title = "rss"
-url = "index.xml"
+#[[entries]]
+#title = "rss"
+#url = "index.xml"
 
-[[entries]]
-title = "another list"
+#[[entries]]
+#title = "another list"
+#
+#  [[entries.entries]]
+#  title = "with subitems"
 
-  [[entries.entries]]
-  title = "with subitems"
+#    [[entries.entries.entries]]
+#    title = "with subsubitems"
+#
+#    [[entries.entries.entries]]
+#    title = "example page"
+#    url = "about"
 
-    [[entries.entries.entries]]
-    title = "with subsubitems"
-
-    [[entries.entries.entries]]
-    title = "example page"
-    url = "about"
-
-[[entries]]
-title = "PRO TIP"
-entries = [
-   { title = "to edit this menu, edit data/menu.toml file" }
-  ]
+#[[entries]]
+#title = "PRO TIP"
+#entries = [
+#   { title = "to edit this menu, edit data/menu.toml file" }
+#  ]
