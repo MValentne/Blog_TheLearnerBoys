@@ -1,6 +1,6 @@
 +++
 date = '2026-07-08T21:06:31-03:00'
-draft = true
+draft = false
 title = 'Sobre La Creacion De Sitios Con Hugo'
 author = 'Valen'
 keywords = ["explicativo", "prueba", "hugo"]
