@@ -77,7 +77,7 @@ Para crear un post, primero tenemos que visualizar un poco la estructura de carp
 Para hacer un post nosotros usamos un comando de hugo en la terminal; nos paramos en el directorio raiz [^3] y ejecutamos lo siguiente:
 
 ```bash
-    hugo new content/autor/"titulo de la publicacion".md
+  hugo new content/autor/"titulo de la publicacion".md
 ```
 
 Lo cual va a crear un nuevo archivo en la carpeta **content**, que es el markdown en el cual estaremos escribiendo todo el contenido a publicar. Este contenido al inicio tiene un poco de metadata, que se va a tener que completar con base a las necesidades del post.
@@ -87,7 +87,7 @@ Aqui entra el concepto de **taxonomia**, que es la forma en la que organizamos l
 Una vez que escribimos el post en formato markdown (que tarde o temprano utilizaremos de forma natural), queremos ver como se ven los cambios aplicados al blog; en este caso tenemos un comando de hugo que nos da una previsualizacion en localhost de la computadora para saber como se visualizara y cazar errores en nuestros posts:
 
 ```bash
-    hugo server -D
+  hugo server -D
 ```
 
 Donde el -D significa *draft*, por lo que estaremos visualizando los bosquejos que tengamos trabajados en el proyecto, entre ellos, nuestro post (que en el metadata tiene algo como draft = true, que a la hora de publicar seriamente pasaremos a false). 
@@ -99,10 +99,10 @@ abrimos localhost:1313/ y nos deberia visualizar el blog con nuestro post aplica
 Basicamente queremos subir los cambios a main, por lo que de forma muy simple (que vamos a cambiar despues) hacemos:
 
 ```bash
-    git pull
-    git add .
-    git commit -m "mensaje de commit"
-    git push
+  git pull
+  git add .
+  git commit -m "mensaje de commit"
+  git push
 ```
 
 Donde *git pull* es la accion fundamental para mantener nuestra version local del repositorio actualizada respecto a los cambios que haga el resto. Luego, *git add .* agrega todos los cambios al staging area, *git commit -m "mensaje de commit"* crea un nuevo commit con el mensaje especificado, y *git push* sube los cambios al repositorio remoto.
@@ -112,7 +112,7 @@ Esto es muy simple y quiza cambie dentro de muy poco debido a un workflow partic
 Y por ultimo tenemos que hacer deploy a la pagina web (en este caso github pages), donde ya trabaje en un comando de bash (cosa que van a ejecutar en consola). Vayan a la raiz del proyecto y ejecuten el siguiente comando:
 
 ```bash
-    ./deploy.sh
+  ./deploy.sh
 ```
 
 Lo cual ejecuta una serie de comandos que son redundantes para el alcance de esta explicacion, por lo que ha de abstraerse y usarse tal y como esta hecho. 
