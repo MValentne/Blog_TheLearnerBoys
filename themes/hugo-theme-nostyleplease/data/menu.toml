@@ -8,6 +8,10 @@ title = "info"
   title = "[github repo]"
   url = "https://github.com/MValentne/Blog_TheLearnerBoys"
 
+  [[entries.entries]]
+  title = "[image host]"
+  url = "https://postimages.org/"
+
 
 [[entries]]
 title = "recent posts"
