@@ -3,18 +3,12 @@
 <article>
     <h1>{{ .Title }}</h1>
 
-    <div style="color: grey; font-size: 16px">
-        {{if .Params.author}}Author: {{.Params.Author}}{{end}}
-    </div>
-
-    <div style="color: grey; font-size: 16px">
-        {{ with or .Params.keyword .Params.keywords }}Keywords: {{ delimit . ", " }}{{ end }}
-    </div>
-
     {{ if .Params.toc }}
-    <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
-        {{ .TableOfContents }}
-    </aside>
-    {{ end }} {{ .Content }}
+        <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+            {{ .TableOfContents }}
+        </aside>
+    {{ end }}
+
+    {{ .Content }}
 </article>
 {{ end }}

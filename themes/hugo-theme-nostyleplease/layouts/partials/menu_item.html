@@ -15,24 +15,5 @@
         {{- if $item.post_list -}}
             {{ partial "post_list.html" (dict "context" . "section" $item.post_list.section "limit" $item.post_list.limit "show_more" $item.post_list.show_more "show_more_text" $item.post_list.show_more_text "show_more_url" $item.post_list.show_more_url) -}}
         {{- end -}}
-
-        {{- if $item.show_categories -}}
-            {{- if gt (len site.Taxonomies.categories) 0 -}}
-                <div class="categories-box">
-                    <ul class="categories-list">
-                        {{- range $name, $taxonomy := site.Taxonomies.categories -}}
-                            {{- with site.GetPage (printf "/categories/%s" ($name | urlize)) -}}
-                                <li>
-                                    <a href="{{ .RelPermalink }}">{{ .Title | default $name | humanize }}</a>
-                                    <span class="category-count">({{ len $taxonomy }})</span>
-                                </li>
-                            {{- end -}}
-                        {{- end -}}
-                    </ul>
-                </div>
-            {{- else -}}
-                <p style="opacity: 0.6; font-size: 0.9em; margin: 0.5rem 0 1rem 0;">No categories found.</p>
-            {{- end -}}
-        {{- end -}}
     {{- end -}}
 </ul>

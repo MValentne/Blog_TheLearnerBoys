@@ -1,0 +1,53 @@
+{{- /*
+  ============================================================
+  OVERRIDE: layouts/posts/single.html
+  ============================================================
+  Sobreescribe el template del tema para posts individuales
+  (themes/hugo-theme-nostyleplease/layouts/posts/single.html).
+  Hugo siempre prioriza los archivos en layouts/ del proyecto raíz.
+
+  CAMBIOS RESPECTO AL ORIGINAL DEL TEMA:
+    1. Se agregó un bloque que muestra el autor del post si el
+       front matter del post incluye `author: "Nombre"`.
+    2. Se agregó un bloque que muestra keywords/palabras clave si el
+       front matter incluye `keyword: [...]` o `keywords: [...]`.
+       Acepta ambas variantes de la key para mayor flexibilidad.
+
+  USO EN FRONT MATTER DE UN POST:
+    ---
+    title: "Mi post"
+    author: "Juan"
+    keywords: ["tecnología", "programación"]
+    ---
+
+  MANTENIMIENTO:
+    - Los estilos del author/keywords se aplican inline (color gris,
+      font-size 16px). Si se quiere cambiar el estilo globalmente,
+      mover esas propiedades a assets/css/main.scss.
+    - Si el tema upstream cambia single.html, mergear los cambios
+      prestando atención a los bloques de author y keywords.
+  ============================================================
+*/ -}}
+{{ define "main" }}
+
+<article>
+    <h1>{{ .Title }}</h1>
+
+    {{- /* Autor del post: se muestra si el front matter tiene `author: "..."` */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{if .Params.author}}Author: {{.Params.Author}}{{end}}
+    </div>
+
+    {{- /* Keywords del post: acepta `keyword` o `keywords` en el front matter.
+         Ejemplo: keywords: ["tech", "hugo"] → muestra "Keywords: tech, hugo" */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{ with or .Params.keyword .Params.keywords }}Keywords: {{ delimit . ", " }}{{ end }}
+    </div>
+
+    {{ if .Params.toc }}
+    <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+        {{ .TableOfContents }}
+    </aside>
+    {{ end }} {{ .Content }}
+</article>
+{{ end }}

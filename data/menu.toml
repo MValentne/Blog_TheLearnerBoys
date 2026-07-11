@@ -1,0 +1,100 @@
+# ============================================================
+# OVERRIDE: data/menu.toml
+# ============================================================
+# Sobreescribe el menú del tema
+# (themes/hugo-theme-nostyleplease/data/menu.toml).
+# Hugo prioriza data/ del proyecto raíz sobre el del tema.
+#
+# ESTRUCTURA DEL MENÚ:
+#   Cada [[entries]] es una sección de nivel superior en el sidebar.
+#   Las entradas soportan:
+#     - title: texto visible
+#     - url: link (opcional, sin URL muestra solo el texto)
+#     - [[entries.entries]]: subitems anidados
+#     - [entries.post_list]: lista automática de posts recientes
+#         - limit: máximo de posts a mostrar
+#         - show_more / show_more_text / show_more_url: botón "ver más"
+#     - show_categories = true: activa el widget de categorías
+#         (requiere layouts/partials/menu_item.html override)
+#
+# MANTENIMIENTO:
+#   - Para agregar una sección nueva, copiar un bloque [[entries]]
+#   - Para ocultar una sección sin borrarla, comentar con #
+#   - Los estilos del widget de categorías están en assets/css/main.scss
+# ============================================================
+
+
+# ------------------------------------------------------------------
+# SECCIÓN: info
+# Descripción del blog y links de referencia
+# ------------------------------------------------------------------
+[[entries]]
+title = "info"
+
+  [[entries.entries]]
+  # Descripción del blog (se muestra como texto plano, sin link)
+  title = "Somos un grupo de amigos que decidimos armar este espacio para compartir lo que se nos ocurra: proyectos, ideas, gustos, y todo lo que vaya surgiendo en el camino. No hay un tema fijo — cada uno aporta lo suyo."
+
+  [[entries.entries]]
+  # Link al repositorio del blog en GitHub
+  title = "[github repo]"
+  url = "https://github.com/MValentne/Blog_TheLearnerBoys"
+
+  [[entries.entries]]
+  # Servicio de hosting de imágenes usado para subir imágenes a los posts
+  title = "[image host]"
+  url = "https://postimages.org/"
+
+
+# ------------------------------------------------------------------
+# SECCIÓN: recent posts
+# Lista automática de los últimos posts del sitio
+# ------------------------------------------------------------------
+[[entries]]
+title = "recent posts"
+
+  [entries.post_list]
+  limit = 5                      # Máximo de posts a mostrar en el sidebar
+  show_more = true               # Mostrar botón "ver más"
+  show_more_text = "See archive..."
+  show_more_url = "posts"        # URL del archivo completo de posts
+
+
+# ------------------------------------------------------------------
+# SECCIÓN: categories
+# Widget de categorías con conteo de posts por categoría.
+# Requiere: layouts/partials/menu_item.html (override en layouts/ raíz)
+# Los estilos están en: assets/css/main.scss (sección custom)
+# ------------------------------------------------------------------
+[[entries]]
+title = "categories"
+show_categories = true           # Activa el widget de categorías (custom)
+
+
+# ------------------------------------------------------------------
+# SECCIONES COMENTADAS (del tema original, desactivadas)
+# Descomentar si se quieren usar en el futuro
+# ------------------------------------------------------------------
+
+#[[entries]]
+#title = "rss"
+#url = "index.xml"
+
+#[[entries]]
+#title = "another list"
+#
+#  [[entries.entries]]
+#  title = "with subitems"
+
+#    [[entries.entries.entries]]
+#    title = "with subsubitems"
+#
+#    [[entries.entries.entries]]
+#    title = "example page"
+#    url = "about"
+
+#[[entries]]
+#title = "PRO TIP"
+#entries = [
+#   { title = "to edit this menu, edit data/menu.toml file" }
+#  ]

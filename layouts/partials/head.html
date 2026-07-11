@@ -1,0 +1,59 @@
+{{- /*
+  ============================================================
+  OVERRIDE: layouts/partials/head.html
+  ============================================================
+  Sobreescribe el partial del tema (themes/hugo-theme-nostyleplease/layouts/partials/head.html).
+  Hugo siempre prioriza los archivos en layouts/ del proyecto raíz
+  sobre los del tema, así que cualquier cambio aquí es seguro y no
+  toca el submódulo.
+
+  CAMBIOS RESPECTO AL ORIGINAL DEL TEMA:
+    - Se agregaron tags <link> de favicon (favicon.ico, favicon-32x32.png,
+      favicon-16x16.png, apple-touch-icon.png, site.webmanifest).
+      Los archivos de favicon deben estar en la carpeta static/ del proyecto.
+
+  MANTENIMIENTO:
+    - Si el tema upstream cambia su head.html, revisar si hay cambios
+      relevantes y mergearlos manualmente acá.
+    - Los favicons se generan con herramientas como https://realfavicongenerator.net/
+      y los archivos resultantes van en static/.
+  ============================================================
+*/ -}}
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{ if .IsPage }} <meta name="description" content="{{ .Summary }}">  {{ end }}
+
+  <!-- =====================================================
+       Favicons: aparecen como el logo/ícono en la pestaña
+       del navegador y en marcadores.
+       Archivos necesarios en static/:
+         - favicon.ico
+         - favicon-32x32.png
+         - favicon-16x16.png
+         - apple-touch-icon.png  (para iOS)
+         - site.webmanifest      (para Android/PWA)
+       ===================================================== -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
+  <link rel="icon" href="{{ "favicon.ico" | relURL }}">
+  <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
+
+  <title>
+    {{ if not .IsHome }}
+      {{ .Title }}
+    {{ else }}
+      {{ $.Site.Title }}
+    {{ end }}
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="{{ $.Site.Params.favicon | relURL }}" />
+  {{ $options := (dict "outputStyle" "compressed" "enableSourceMap" (not hugo.IsProduction)) }}
+  {{ $sass := resources.Get "css/main.scss" }}
+  {{ $style := $sass | css.Sass $options | resources.Fingerprint "sha512" }}
+  <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" integrity="{{ $style.Data.Integrity }}" />
+  {{ if .Params.mathjax }} {{ partial "mathjax.html" . }} {{ end }}
+</head>

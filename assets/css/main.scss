@@ -1,3 +1,27 @@
+// ============================================================
+// OVERRIDE: assets/css/main.scss
+// ============================================================
+// Sobreescribe el CSS del tema
+// (themes/hugo-theme-nostyleplease/assets/css/main.scss).
+// Hugo Pipes prioriza assets/ del proyecto raíz sobre el del tema,
+// por lo que este archivo reemplaza completamente al del tema.
+//
+// IMPORTANTE: Este archivo INCLUYE todo el CSS original del tema
+// más los estilos custom de este proyecto. Si el tema upstream
+// actualiza su main.scss, hay que mergear los cambios manualmente.
+//
+// SECCIONES:
+//   1. CSS ORIGINAL DEL TEMA (sin modificaciones)
+//   2. ESTILOS CUSTOM DEL PROYECTO (agregados localmente)
+// ============================================================
+
+
+// ==============================================================
+// SECCIÓN 1: CSS ORIGINAL DEL TEMA (hugo-theme-nostyleplease)
+// No modificar esta sección. Cualquier cambio de estilo del proyecto
+// va en la Sección 2, al final del archivo.
+// ==============================================================
+
 // -------------- THEME SWITCHER -------------- //
 @mixin theme($--bg-color, $--primary-text-color, $--secondary-text-color, $--link-color, $--visited-link-color, $--highlight) {
   background-color: $--bg-color;
@@ -178,4 +202,58 @@ details[open] summary {
 
 .toc {
   padding: 1rem;
+}
+
+
+// ==============================================================
+// SECCIÓN 2: ESTILOS CUSTOM DEL PROYECTO (TheLearnerBoys)
+// Agregá aquí cualquier estilo propio del blog.
+// Estos estilos van DESPUÉS del tema para poder hacer override.
+// ==============================================================
+
+// ---------------------------------------------------------------
+// Widget de categorías en el menú lateral
+// Usado por layouts/partials/menu_item.html cuando una entrada
+// del menú tiene show_categories = true en data/menu.toml.
+// ---------------------------------------------------------------
+
+// Contenedor con scroll del widget de categorías
+.categories-box {
+  border: 1px solid currentColor;  // Usa el color de texto actual (compatible con dark/light mode)
+  padding: 10px 15px;
+  max-height: 180px;               // Altura máxima antes de activar scroll
+  overflow-y: auto;                // Scroll vertical si hay muchas categorías
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+// Lista de categorías sin bullets
+.categories-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+// Cada fila de categoría: nombre a la izquierda, conteo a la derecha
+.categories-list li {
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Link de categoría sin subrayado (el hover lo agrega)
+.categories-list li a {
+  text-decoration: none;
+}
+
+.categories-list li a:hover {
+  text-decoration: underline;
+}
+
+// Número de posts por categoría: más pequeño y semitransparente
+.category-count {
+  opacity: 0.6;
+  font-size: 0.9em;
 }

@@ -1,0 +1,74 @@
+{{- /*
+  ============================================================
+  OVERRIDE: layouts/partials/menu_item.html
+  ============================================================
+  Sobreescribe el partial del tema (themes/hugo-theme-nostyleplease/layouts/partials/menu_item.html).
+  Hugo siempre prioriza los archivos en layouts/ del proyecto raíz
+  sobre los del tema.
+
+  CAMBIOS RESPECTO AL ORIGINAL DEL TEMA:
+    - Se agregó soporte para la clave `show_categories = true` en data/menu.toml.
+      Cuando una entrada del menú tiene show_categories = true, este partial
+      renderiza un widget con todas las taxonomías de categorías del sitio,
+      incluyendo el conteo de posts por categoría.
+
+  CÓMO FUNCIONA:
+    1. En data/menu.toml, agregar una entrada con show_categories = true:
+         [[entries]]
+         title = "categories"
+         show_categories = true
+    2. Los estilos del widget (.categories-box, .categories-list, etc.)
+       están en assets/css/main.scss (al final del archivo).
+    3. Para que aparezcan las categorías, los posts deben tener en su
+       front matter: categories: ["nombre-categoria"]
+
+  MANTENIMIENTO:
+    - Si el tema upstream cambia menu_item.html, mergear los cambios
+      upstream con el bloque `show_categories` que agregamos.
+  ============================================================
+*/ -}}
+<ul>
+    {{- range $item := .collection -}}
+        <li>
+            {{- with $item.url -}}
+                <a href="{{ $item.url | relURL }}">{{ safeHTML $item.title }}</a>
+            {{- else -}}
+                {{ safeHTML $item.title }}
+            {{- end -}}
+        </li>
+
+        {{- if $item.entries }}
+            {{ partial "menu_item.html" (dict "context" . "collection" $item.entries) }}
+        {{- end -}}
+
+        {{- if $item.post_list -}}
+            {{ partial "post_list.html" (dict "context" . "section" $item.post_list.section "limit" $item.post_list.limit "show_more" $item.post_list.show_more "show_more_text" $item.post_list.show_more_text "show_more_url" $item.post_list.show_more_url) -}}
+        {{- end -}}
+
+        {{- /* ==================================================
+             Widget de categorías: se activa cuando la entrada del
+             menú tiene show_categories = true en data/menu.toml.
+             Itera sobre site.Taxonomies.categories para listar
+             todas las categorías con su cantidad de posts.
+             ================================================== */ -}}
+        {{- if $item.show_categories -}}
+            {{- if gt (len site.Taxonomies.categories) 0 -}}
+                <div class="categories-box">
+                    <ul class="categories-list">
+                        {{- range $name, $taxonomy := site.Taxonomies.categories -}}
+                            {{- with site.GetPage (printf "/categories/%s" ($name | urlize)) -}}
+                                <li>
+                                    <a href="{{ .RelPermalink }}">{{ .Title | default $name | humanize }}</a>
+                                    <span class="category-count">({{ len $taxonomy }})</span>
+                                </li>
+                            {{- end -}}
+                        {{- end -}}
+                    </ul>
+                </div>
+            {{- else -}}
+                {{- /* Mensaje fallback si no hay ninguna categoría aún */ -}}
+                <p style="opacity: 0.6; font-size: 0.9em; margin: 0.5rem 0 1rem 0;">No categories found.</p>
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+</ul>
