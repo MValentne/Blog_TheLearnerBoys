@@ -12,12 +12,16 @@
     2. Se agregó un bloque que muestra keywords/palabras clave si el
        front matter incluye `keyword: [...]` o `keywords: [...]`.
        Acepta ambas variantes de la key para mayor flexibilidad.
+    3. Se agrego un bloque que muestra la categoria si el front matter lo incluye.
+        Se pide prudencia a la hora de incluir categorias significantes, para no llenar
+        el apartado de categorias con redundancia.
 
   USO EN FRONT MATTER DE UN POST:
     ---
     title: "Mi post"
     author: "Juan"
     keywords: ["tecnología", "programación"]
+    category: ["category 1", category 2"]
     ---
 
   MANTENIMIENTO:
@@ -42,6 +46,12 @@
          Ejemplo: keywords: ["tech", "hugo"] → muestra "Keywords: tech, hugo" */ -}}
     <div style="color: grey; font-size: 16px">
         {{ with or .Params.keyword .Params.keywords }}Keywords: {{ delimit . ", " }}{{ end }}
+    </div>
+
+    {{- /* Categories del post: acepta `category` o `categories` en el front matter.
+         Ejemplo: categories: ["tech", "hugo"] → muestra "Categories: tech, hugo" */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{ with or .Params.category .Params.categories }}Categories: {{ delimit . ", " }}{{ end }}
     </div>
 
     {{ if .Params.toc }}
