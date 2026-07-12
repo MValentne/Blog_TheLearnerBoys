@@ -13,3 +13,8 @@ theme = "hugo-theme-nostyleplease"
 # Nos permite meter html en medio del markdown, GIFS LOQUISIMOS
 [markup.goldmark.renderer]
     unsafe = true
+
+# Apariencia del sistema, (light / dark / auto)
+[params]
+  [params.theme_config]
+    appearance = "light"

@@ -1,4 +1,4 @@
-{{- /*
+<!--
   ============================================================
   OVERRIDE: layouts/footer.md
   ============================================================
@@ -17,8 +17,7 @@
     - Para agregar texto al footer (ej: copyright), agregar debajo
       del <img> un <p> o <span> con el contenido deseado.
   ============================================================
-*/ -}}
 
-<!-- GIF decorativo en el footer. Hosteado en gifsanimados.org.
+ GIF decorativo en el footer. Hosteado en gifsanimados.org.
      Si la URL falla, mover el archivo a static/images/ y usar relURL. -->
 <img src="https://www.gifsanimados.org/data/media/56/computadora-y-ordenador-imagen-animada-0154.gif" border="0" alt="computadora animada" /></a>
