@@ -1,0 +1,40 @@
+{{- /*
+  ============================================================
+  LAYOUT: layouts/_default/links.html
+  ============================================================
+  Template para la página "Sitios que nos gustan" (/links).
+  Lee la lista de links desde data/links.toml y los renderiza
+  como una lista de anclas externas.
+
+  CÓMO AGREGAR LINKS:
+    Editar data/links.toml y agregar un bloque:
+
+      [[links]]
+      title       = "Nombre del sitio"
+      url         = "https://..."
+      description = "Descripción opcional"
+
+  ============================================================
+*/ -}}
+{{ define "main" }}
+{{ partial "back_link.html" . }}
+
+<article>
+    <h1>{{ .Title }}</h1>
+
+    {{ with site.Data.links.links }}
+        <ul>
+            {{- range . -}}
+            <li>
+                <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .title }}</a>
+                {{- with .description -}}
+                &nbsp;&mdash; {{ . }}
+                {{- end -}}
+            </li>
+            {{- end -}}
+        </ul>
+    {{ else }}
+        <p>Todavía no hay sitios en la lista. Agregalos en <code>data/links.toml</code>.</p>
+    {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,23 @@
+# ============================================================
+# data/links.toml — Sitios que nos gustan
+# ============================================================
+# Cada [[links]] es un sitio externo que aparece en /links.
+#
+# Campos disponibles:
+#   title       = "Nombre visible del sitio"   (obligatorio)
+#   url         = "https://..."                (obligatorio)
+#   description = "Descripción breve"          (opcional)
+#
+# Para agregar un sitio nuevo, copiar un bloque [[links]] y
+# completar los campos. El orden aquí es el orden en pantalla.
+# ============================================================
+
+
+# ------------------------------------------------------------------
+# Ejemplos / Placeholders — reemplazar con los sitios reales
+# ------------------------------------------------------------------
+
+[[links]]
+title = "j3s.sh"
+url   = "https://j3s.sh/now.html"
+description = "Blog de opinión de Jes."

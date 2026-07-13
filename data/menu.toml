@@ -72,6 +72,16 @@ show_categories = true           # Activa el widget de categorías (custom)
 
 
 # ------------------------------------------------------------------
+# SECCIÓN: sitios que nos gustan
+# Lista de links a sitios externos. Editar en: data/links.toml
+# ------------------------------------------------------------------
+[[entries]]
+title = "sitios que nos gustan"
+url = "links"
+show_links = true              # Activa el widget de links (custom)
+
+
+# ------------------------------------------------------------------
 # SECCIONES COMENTADAS (del tema original, desactivadas)
 # Descomentar si se quieren usar en el futuro
 # ------------------------------------------------------------------
