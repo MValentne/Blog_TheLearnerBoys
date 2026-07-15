@@ -16,6 +16,9 @@ echo "==> Sincronizando con el repositorio remoto..."
 git -C "$REPO_ROOT" fetch origin
 
 echo "==> Configurando carpeta public/ como worktree de gh-pages..."
+# Limpiar worktrees huérfanos/prunables en git
+git -C "$REPO_ROOT" worktree prune
+
 # Si public/ existe pero no es un worktree (por ejemplo, es una carpeta normal), la eliminamos
 if [ -d "$PUBLIC_DIR" ] && [ ! -d "$PUBLIC_DIR/.git" ] && [ ! -f "$PUBLIC_DIR/.git" ]; then
   echo "Limpiando directorio public/ existente que no es un worktree..."
