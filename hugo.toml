@@ -18,3 +18,10 @@ theme = "hugo-theme-nostyleplease"
 [params]
   [params.theme_config]
     appearance = "light"
+
+# Entrada de menú para la sección de Hilos
+[[menu.main]]
+  name = "Hilos"
+  url = "/hilos/"
+  weight = 15
+

@@ -1,0 +1,36 @@
+{{ define "main" }}
+{{- /*
+  ============================================================
+  LAYOUT OVERRIDE: layouts/hilos/list.html
+  ============================================================
+  Este layout controla la visualización de la sección "Hilos".
+  
+  DIFERENCIA CON EL TEMA ORIGINAL:
+  - En lugar de usar .Site.RegularPages (que listaría todos los posts
+    del sitio entero), este template itera sobre `.Pages` para listar
+    únicamente las páginas hijas directas de la sección actual.
+    
+  ESTO RESUELVE:
+  - En /hilos/ -> lista las series existentes (carpetas con _index.md propio).
+  - En /hilos/nombre-serie/ -> lista solo los posts de esa serie.
+  ============================================================
+*/ -}}
+
+{{ partial "back_link.html" . }}
+
+<h1>{{ .Title }}</h1>
+
+{{ .Content }}
+
+{{- if gt (len .Pages) 0 }}
+    <ul>
+        {{- range .Pages.ByDate.Reverse -}}
+        <li>
+            <span>{{- (.Date | time.Format site.Params.theme_config.date_format) }}</span>
+            <a href="{{ .Permalink | relURL }}">{{ .Title }}</a>
+        </li>
+        {{- end -}}
+    </ul>
+{{- end }}
+
+{{ end }}

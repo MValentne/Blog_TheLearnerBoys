@@ -51,7 +51,7 @@ title = "info"
 # Lista automática de los últimos posts del sitio
 # ------------------------------------------------------------------
 [[entries]]
-title = "recent posts"
+title = "posts recientes"
 
   [entries.post_list]
   limit = 5                      # Máximo de posts a mostrar en el sidebar
@@ -61,13 +61,22 @@ title = "recent posts"
 
 
 # ------------------------------------------------------------------
+# SECCIÓN: hilos
+# Link a la sección principal de Hilos (series de posts)
+# ------------------------------------------------------------------
+[[entries]]
+title = "hilos e historias"
+url = "hilos"
+
+
+# ------------------------------------------------------------------
 # SECCIÓN: categories
 # Widget de categorías con conteo de posts por categoría.
 # Requiere: layouts/partials/menu_item.html (override en layouts/ raíz)
 # Los estilos están en: assets/css/main.scss (sección custom)
 # ------------------------------------------------------------------
 [[entries]]
-title = "categories"
+title = "categorías"
 show_categories = true           # Activa el widget de categorías (custom)
 
 
