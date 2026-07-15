@@ -61,6 +61,15 @@ title = "recent posts"
 
 
 # ------------------------------------------------------------------
+# SECCIÓN: hilos
+# Link a la sección principal de Hilos (series de posts)
+# ------------------------------------------------------------------
+[[entries]]
+title = "hilos"
+url = "hilos"
+
+
+# ------------------------------------------------------------------
 # SECCIÓN: categories
 # Widget de categorías con conteo de posts por categoría.
 # Requiere: layouts/partials/menu_item.html (override en layouts/ raíz)
