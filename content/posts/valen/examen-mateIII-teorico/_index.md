@@ -4,7 +4,7 @@ draft = true
 title = 'Notas para el final teórico de Análisis Matemático'
 author = 'Valen'
 keywords = ["examen", "notas personales"]
-category = ["Math"]
+category = ["Matematica"]
 +++
 Resulta que tengo un final de analisis matematico, correspondiente a matematica III en mi carrera informatica. Tomo la situacion como excusa para jugar mas con el framework y darle un poco de vida al blog. 
 
@@ -16,4 +16,4 @@ El plan de catedra se divide en:
 5. ECUACIONES DIFERENCIALES 
 6. FUNCIONES MULTIVARIABLE
 
-Si bien no hare enfasis suficiente en cuestiones practicas, ya que tengo regularizada esa parte, quiza y tenga que desarrollar algun ejercicio, por lo que aclaro que el enfoque de este estudio radica en lo teorico y no lo practico.
+Si bien no hare enfasis suficiente en cuestiones practicas, ya que tengo regularizada esa parte, quiza y tenga que desarrollar algun ejercicio, por lo que aclaro que el enfoque de este estudio radica en lo teorico y no en lo practico.

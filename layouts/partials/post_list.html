@@ -1,0 +1,77 @@
+{{- /*
+  ============================================================
+  OVERRIDE: layouts/partials/post_list.html
+  ============================================================
+  Sobreescribe el partial del tema.
+  Hugo siempre prioriza los archivos en layouts/ del proyecto raíz
+  sobre los del tema.
+
+  CAMBIOS RESPECTO AL ORIGINAL DEL TEMA:
+    - Se agregó soporte para el parámetro `list_sections = true`.
+      Cuando se activa, el partial lista las section pages (_index.md)
+      de todo el sitio en vez de los posts individuales (RegularPages).
+      Esto permite mostrar en el sidebar las secciones (ej: "examen-mateIII-teorico")
+      como entrada principal, en vez de sus posts individuales.
+
+  CÓMO FUNCIONA:
+    1. En data/menu.toml, agregar `list_sections = true` dentro de [entries.post_list]:
+         [entries.post_list]
+         list_sections = true
+         limit = 5
+    2. El partial usará site.Pages filtradas por Kind == "section"
+       para listar las secciones que tengan _index.md.
+    3. Al hacer click en una sección, se llega a su page list
+       donde se ven sus posts internos (via layouts/posts/list.html).
+
+  MANTENIMIENTO:
+    - Si el tema upstream cambia post_list.html, mergear los cambios
+      upstream manteniendo el bloque `list_sections`.
+  ============================================================
+*/ -}}
+
+{{- $posts := "" -}}
+
+{{- if .list_sections -}}
+    {{- /*
+      Modo "listar secciones": lista las section pages (_index.md)
+      Excluimos la raíz (Kind = "home") y filtramos solo Kind = "section"
+    */ -}}
+    {{- $posts = where site.Pages "Kind" "section" -}}
+    {{- $posts = where $posts "IsHome" false -}}
+{{- else if .section -}}
+    {{- $posts = (where site.RegularPages "Section" .section) -}}
+{{- else -}}
+    {{- if (eq .context.Kind "taxonomy") -}}
+        {{- $posts = .context.Pages -}}
+    {{- else -}}
+        {{- if (eq .context.Kind "term") -}}
+            {{- $posts = .context.Data.Pages -}}
+        {{- else -}}
+            {{- $posts = site.RegularPages }}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $limit_exceeded:= "" -}}
+{{- if (and .limit (gt (len $posts) .limit)) -}}
+    {{- $limit_exceeded = true -}}
+{{- else -}}
+    {{- $limit_exceeded = false -}}
+{{ end }}
+
+{{- if (gt (len $posts) 0) }}
+    {{- if .limit }}
+        {{ $posts = (first .limit $posts ) }}
+    {{ end }}
+    <ul>
+        {{- range $post := $posts -}}
+        <li>
+            <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
+            <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+        </li>
+        {{ end }}
+        {{- if and .show_more $limit_exceeded }}
+            <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+        {{ end }}
+    </ul>
+{{ end }}

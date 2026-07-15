@@ -4,7 +4,7 @@ draft = true
 title = 'Limites Y Continuidad'
 author = 'Valen'
 keywords = ["calculo", "limites", "continuidad"]
-category = ["Math"]
+category = ["Matematica"]
 +++
 El interes de esta unidad es hablar sobre las bases fundamentales del calculo, en particular del concepto de limite, ya que todo se desarrolla a partir de ese concepto.
 
@@ -67,3 +67,43 @@ Los limites laterales nos sirven para determinar si hay un limite bilateral, dig
 ![limites-laterales.png](https://i.postimg.cc/Gh4srgK8/limites-laterales.png)
 
 Y por ultimo, una funcion tiene un limite bilateral, digase, tiene un limite, si los limites laterales por izquierda y derecha coinciden a un mismo valor, el cual debera coincidir con la imagen del valor puntual evaluado.
+
+# 6: Infinidad en limites
+Y a partir de este punto empezamos a jugar con **infinitos**. Primero tenemos que aclarar que el **infinito** es un valor indeterminado, que no toma un valor puntual. Cuando hablamos de infinito, pensemos en un crecimiento o decrecimiento descomunal, no en un solo numero. Es por eso que una indeterminacion de division por 0, llega a tener un crecimiento y decrecimiento infinitos analizando a izquierda y derecha; de ahi surge una asintota.
+
+![limites-laterales-formalizado.png](https://i.postimg.cc/tRw6hvxF/limites-laterales-formalizado.png)
+
+La idea clave es que para cualquier valor que tome *M*, siempre habra una imagen entre *a* y *x* que sea mayor o menor que *M*, por lo que intuitivamente podemos caracterizar el crecimiento infinito de la funcion cuando *x* tiende a *a*, ya sea por izquierda o derecha.
+
+Tambien es frecuente el escenario en el que queremos estudiar que ocurre cuando *x* tiende al infinito en *f(x)*, a esto lo llamamos un **limite al infinito**.
+
+![limites-al-infinito.png](https://i.postimg.cc/ncbh8xFK/limites-al-infinito.png)
+
+Y por ultimo, tambien es posible un **limite infinito en el infinito**, al que podemos visualizar intuitivamente como un crecimiento sin limitaciones, por lo que cuando *x* tiende a *infinito* en *f(x)*, *f(x)* tambien va a tender a *infinito*.
+
+# 7: Propiedades de los limites
+Ya entrando un poco mas en cuestiones practicas, tenemos las siguientes propiedades fundamentales al operar con limites:
+
+![propiedades-de-los-limites.png](https://i.postimg.cc/43ShV0zv/propiedades-de-los-limites.png)
+
+> La demostracion de estas propiedades requiere de **demostraciones epsilon - delta**, que regresan a la definicion formal del limite. Eso va mas alla de la intencion de este estudio, ya que lo damos por hecho.
+
+Tambien hay que aclarar que si no se presenta una indeterminacion al remplazar el valor inmediato de *x*, entonces el limite tiene una solucion trivial.
+
+# 8: Teorema del emparedado
+Esto es intuitivo y nos da una herramienta util a la hora de trabajar con algunas expresiones trigonometricas:
+
+![teorema-del-emparedado.png](https://i.postimg.cc/h41M79Cw/teorema-del-emparedado.png)
+
+Y eso fundamenta la siguiente identidad, que es bastante recurrente:
+
+![aplicacion-teorema-del-emparedado.png](https://i.postimg.cc/xd91qVcn/aplicacion-teorema-del-emparedado.png)
+
+# 9: Indeterminaciones
+Aqui nos es relevante tener un algebra decente para poder enfrentarnos a las **indeterminaciones** que pueden surgir al operar con infinitos. Con **resolver una indeterminacion** nos referimos a arreglar la expresion, usualmente mediante el uso de **artificios matematicos** para que al resolver el limite inmediato, este no resulte en una indeterminacion y nos de un valor final.
+
+Tenemos las siguientes indeterminaciones posibles:
+
+![Indeterminaciones.png](https://i.postimg.cc/TYHspV1M/Indeterminaciones.png)
+
+Cada una de ellas tiene un metodo distinto para intentar salvar dicha indeterminacion, a continuacion algunos desarrollos practicos de cada tipo:
