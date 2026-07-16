@@ -14,6 +14,10 @@ theme = "hugo-theme-nostyleplease"
 [markup.goldmark.renderer]
     unsafe = true
 
+[markup.tableOfContents]
+    startLevel = 1
+    endLevel = 6
+
 # Apariencia del sistema, (light / dark / auto)
 [params]
   [params.theme_config]
