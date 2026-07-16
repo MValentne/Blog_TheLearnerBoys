@@ -1,6 +1,6 @@
 +++
 date = '2026-07-13T17:59:12-03:00'
-draft = true
+draft = false
 title = 'Notas para el final teórico de Análisis Matemático'
 author = 'Valen'
 keywords = ["examen", "notas personales"]

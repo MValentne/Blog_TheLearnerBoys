@@ -1,6 +1,6 @@
 +++
 date = '2026-07-13T18:11:20-03:00'
-draft = true
+draft = false
 title = 'Limites Y Continuidad'
 author = 'Valen'
 keywords = ["calculo", "limites", "continuidad"]
@@ -107,3 +107,69 @@ Tenemos las siguientes indeterminaciones posibles:
 ![Indeterminaciones.png](https://i.postimg.cc/TYHspV1M/Indeterminaciones.png)
 
 Cada una de ellas tiene un metodo distinto para intentar salvar dicha indeterminacion, a continuacion algunos desarrollos practicos de cada tipo:
+
+![Indeterminaciones-0-0.png](https://i.postimg.cc/TYtCGZYD/Indeterminaciones-0-0.png)
+
+En este tipo de indeterminaciones buscamos factorizar polinomios para poder simplificar y arreglar el problema con el denominador.
+
+Tambien es comun el siguiente escenario:
+
+![Indeterminaciones-0-0-complemento.png](https://i.postimg.cc/Ls1cJHnv/Indeterminaciones-0-0-complemento.png)
+
+Donde utilizamos un **artificio matematico** para multiplicar por *1*, lo cual no afecta a la expresion; multiplicamos y dividimos por el conjugado del numerador, por lo que llegamos a una [diferenca de cuadrados](https://es.wikipedia.org/wiki/Diferencia_de_dos_cuadrados).
+
+![Indeterminaciones-inf-inf.png](https://i.postimg.cc/TwCXrTXY/Indeterminaciones-inf-inf.png)
+
+Se puede observar que el grado del numerador y del denominador son los factores de mayor relevancia en este tipo de indeterminaciones, ya que a simple vista podemos ver, dependiendo de si es una fraccion propia o impropia, el resultado que dara el limite.
+
+![Indeterminaciones-0-x-inf.png](https://i.postimg.cc/P5g6F9M3/Indeterminaciones-0-x-inf.png)
+
+La idea es reescribir el producto a una division, por lo que tenemos una expresion mas facil de manejar, o a lo sumo, otra indeterminacion distinta.
+
+![Indeterminaciones-inf-inf.png](https://i.postimg.cc/RFBM1vbx/Indeterminaciones-inf-inf.png)
+
+Factorizamos, convertimos en un producto y pasa a tener una solucion trivial.
+
+![Indeterminaciones-exponente-0.png](https://i.postimg.cc/sgVrnn3K/Indeterminaciones-exponente-0.png)
+
+Resolvemos utilizando propiedades del logaritmo natural, por lo que nos queda euler elevado a un limite.
+
+![Indeterminaciones-exponente-inf-a-1.png](https://i.postimg.cc/BngYYm2F/Indeterminaciones-exponente-inf-a-1.png)
+
+Usamos bastante juego con propiedades de exponentes y resolvemos de forma trivial siguiendo la forma. Note la constante presencia de euler...
+
+# 10: Continuidad
+Como tema de cierre, nos interesa analizar si una funcion es continua, pero que significa que una funcion sea continua? de manera informal y poco rigurosa podemos decir:
+
+> Una funcion continua es aquella que podemos dibujar sin levantar el lapiz de la hoja
+
+Y esto es correcto, pero nos es mas nutritivo entenderlo a profundidad;
+
+![criterio-de-continuidad.png](https://i.postimg.cc/MGYSY0pf/criterio-de-continuidad.png)
+
+Esto, explicado brevemente, nos ayuda a saber si un valor puntual es continuo dentro de la funcion.
+1. La imagen existe en ese punto.
+2. Cuando la funcion tiende a ese punto, existe un limite (bilateral).
+3. La imagen y el limite coinciden en ese punto.
+
+# 11: Discontinuidades de funciones
+Cuando hablamos de discontinuidades nos referimos principalmente a tres tipos:
+1. Discontinuidad evitable.
+2. Discontinuidad inevitable - salto finito.
+3. Discontinuidad inevitable - salto infinito.
+
+![discontinuidades.png](https://i.postimg.cc/Qdh269K1/discontinuidades.png)
+
+Y a este punto debio haber surgido esta duda, nosotros estamos probando que la funcion es continua en un valor puntual, pero como analizamos mas alla de solo un punto?
+
+# 12: Propiedades de continuidad
+Las siguientes propiedades nos sirven para probar la continuidad de mas alla de un solo punto en la funcion:
+**si las funciones *f* y *g* son continuas en *x = c*, entonces las siguientes funciones son continuas en:**
+1. *f* + *g* y *f* - *g*
+2. *fg*
+3. *kf*, donde *k* es cualquier numero real.
+4. *f/g*, si *g(c) != 0*
+5. *(f(c))^(m/n)*, si *f(x)* esta en un intervalo que contenga a *c*, y *m* y *n* son enteros.
+
+Y ademas, para funciones **polinomicas** y **racionales**:
+> Todo polinomio es continuo en cualquier punto de la recta real. Toda funcion racional es continua en cualquier punto de la recta real, siempre y cuando el denominador sea distinto de cero.
