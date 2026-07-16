@@ -1,0 +1,53 @@
+{{- /*
+  ============================================================
+  OVERRIDE: layouts/_default/single.html
+  ============================================================
+  Sobreescribe el template por defecto del tema para páginas
+  individuales (themes/hugo-theme-nostyleplease/layouts/_default/single.html).
+  Hugo siempre prioriza los archivos en layouts/ del proyecto raíz.
+
+  CAMBIOS RESPECTO AL ORIGINAL DEL TEMA:
+    1. Se agregó un bloque que muestra el autor de la página si el
+       front matter incluye `author: "Nombre"`.
+    2. Se agregó un bloque que muestra keywords si el
+       front matter incluye `keyword: [...]` o `keywords: [...]`.
+    3. Se agregó un bloque que muestra la categoría si el
+       front matter incluye `category: [...]` o `categories: [...]`.
+  ============================================================
+*/ -}}
+{{ define "main" }}
+{{ partial "back_link.html" .}}
+
+<article>
+    <p class="post-meta">
+        <time datetime="{{ .Date }}">
+            {{ .Date | time.Format site.Params.theme_config.date_format }}
+        </time>
+    </p>
+
+    <h1>{{ .Title }}</h1>
+
+    {{- /* Autor: se muestra si el front matter tiene `author: "..."` */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{if .Params.author}}Author: {{.Params.Author}}{{end}}
+    </div>
+
+    {{- /* Keywords: acepta `keyword` o `keywords` en el front matter. */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{ with or .Params.keyword .Params.keywords }}Keywords: {{ delimit . ", " }}{{ end }}
+    </div>
+
+    {{- /* Categories: acepta `category` o `categories` en el front matter. */ -}}
+    <div style="color: grey; font-size: 16px">
+        {{ with or .Params.category .Params.categories }}Categories: {{ delimit . ", " }}{{ end }}
+    </div>
+
+    {{ if .Params.toc }}
+    <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+        {{ .TableOfContents }}
+    </aside>
+    {{ end }}
+
+    {{ .Content }}
+</article>
+{{ end }}
