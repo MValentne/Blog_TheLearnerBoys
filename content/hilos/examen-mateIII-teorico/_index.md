@@ -4,7 +4,7 @@ draft = false
 title = 'Notas para el final teórico de Análisis Matemático'
 author = 'Valen'
 keywords = ["examen", "notas personales"]
-category = ["Matematica"]
+categories = ["Matematica"]
 +++
 Resulta que tengo un final de analisis matematico, correspondiente a matematica III en mi carrera informatica. Tomo la situacion como excusa para jugar mas con el framework y darle un poco de vida al blog. 
 
