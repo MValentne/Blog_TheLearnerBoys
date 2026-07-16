@@ -1,8 +1,8 @@
 {
   "name": "Blog TheLearnerBoys",
   "short_name": "TheLearnerBoys",
-  "description": "Blog colaborativo sobre programación, matemática y más",
-  "start_url": "/",
+  "description": "Blog colaborativo sobre intereses individuales",
+  "start_url": "/Blog_TheLearnerBoys/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1a1a1a",
