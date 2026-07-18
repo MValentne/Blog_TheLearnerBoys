@@ -1,6 +1,6 @@
 +++
 date = '2026-07-16T11:09:32-03:00'
-draft = true
+draft = false
 title = 'Derivadas'
 author = 'Valen'
 keywords = ["calculo", "limites", "continuidad"]
@@ -60,3 +60,59 @@ Entre las reglas fundamentales, tenemos:
 ![reglas-fundamentales.png](https://i.postimg.cc/qM7CVfMt/reglas-fundamentales.png)
 
 Cabe aclarar que deben ser derivables en primera instancia. A continuacion, las demostraciones del producto y el cociente:
+
+Para el producto:
+![demostracion-producto.png](https://i.postimg.cc/HkfPXQsv/demostracion-producto.png)
+
+Y para el cociente:
+![demostracion-cociente.png](https://i.postimg.cc/TYxms0tp/demostracion-cociente.png)
+
+El resto voy a dejarlas obviadas, porque de lo contrario consumire demasiado tiempo en cosas triviales.
+
+# 5: Regla de la cadena
+Es frecuente el escenario donde tenemos que derivar [funciones compuestas](https://es.wikipedia.org/wiki/Funci%C3%B3n_compuesta), que consisten en pasar como parametro de una funcion, a otra funcion.
+Digase:
+
+> (f o g)(x) = f(g(x))
+
+Y la cuestion es, como derivamos esto? De forma intuitiva, vamos resolviendo la derivada en orden de prioridad de cada funcion y multiplicamos con la siguiente en la cadena, vista de una forma mas simple
+
+> [f(g(x))]' = f'(g(x)) . g'(x)
+
+Y demostrando esta regla:
+
+![demostracion-regla-cadena.png](https://i.postimg.cc/xCf5sZSq/demostracion-regla-cadena.png)
+
+Y un ejemplo practico:
+
+![ejemplo-regla-cadena.png](https://i.postimg.cc/66GcMnkL/ejemplo-regla-cadena.png)
+
+Fuera de eso, se puede desarrollar de forma practica la demostracion de otras reglas de derivacion, pero son triviales para el enfoque de este estudio; refierase a la tabla de derivadas de la seccion anterior. [Aunque como practica previa a examen, posiblemente edite este post y agregue algunas demostraciones adicionales al final de la publicacion.]
+
+# 6: Derivacion de funciones implicitas
+Hasta ahora hemos visto derivacion de funciones en su forma explicita, digase en la forma:
+
+> f(x) = ax+b, por decir algo.
+
+Ahora vamos a trabajar con su forma [implicita](https://es.wikipedia.org/wiki/Funci%C3%B3n_impl%C3%ADcita), donde trataremos la funcion en el formato:
+
+> y = ax + b, siguiendo el ejemplo anterior.
+
+Donde *y* es funcion de *x*. Esta forma de representar funciones nos sera util mas adelante cuanto tengamos que ver **ecuaciones diferenciales**, ya que podemos resolver ecuaciones siguiendo esta forma.
+
+Para derivar una funcion implicita, se tienen que aplicar las reglas de derivacion previamente vistas, a este punto empezamos a obviar la definicion formal para centrarnos en algebra y reglas de derivacion.
+
+Algunos ejemplos de derivacion implicita:
+
+![derivadas-implicitas.png](https://i.postimg.cc/fymcj3z8/derivadas-implicitas.png)
+
+# 7: Derivaciones de funciones inversas
+No deberia ser intimidante el derivar [funciones inversas](https://es.wikipedia.org/wiki/Funci%C3%B3n_inversa), ya que una funcion inversa no deja de ser una funcion, por lo que el procedimiento de derivacion es el mismo. La distincion con los temas anteriores que podria sumar un poco de dificultad es el tener que encontrar la inversa de la funcion antes de derivar, para lo cual hacemos lo siguiente:
+
+![derivadas-inversas.png](https://i.postimg.cc/HkxtFkBL/derivadas-inversas.png)
+
+Simplemente buscamos la inversa y derivamos dicha funcion. Lo unico relevante, y que debemos de tener en mente, es que la funcion original **admita una funcion inversa**, digase, que la funcion es [biyectiva](https://es.wikipedia.org/wiki/Funci%C3%B3n_biyectiva), y obviamente ademas tiene que ser derivable en primera instancia.
+
+---
+# Extra: Algunas demostraciones adicionales 
+> Despues agrego algunas practicas en este apartado
