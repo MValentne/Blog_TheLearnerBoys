@@ -20,4 +20,9 @@
 [[links]]
 title = "j3s.sh"
 url   = "https://j3s.sh/now.html"
-description = "Blog de opinión de Jes."
+description = "Blog de opinión."
+
+[[links]]
+title = "maurycyz.com"
+url   = "https://maurycyz.com/"
+description = "Blog sobre electronica, software, fotografia y quimica."
