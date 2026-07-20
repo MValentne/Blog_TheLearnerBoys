@@ -19,3 +19,74 @@ Empezamos hablando sobre la razon de cambio, que a grandes razgos es una relacio
 Y de aqui nace la idea de la derivada como la razon de cambio para un valor puntual, indicada por la inclincacion de la pendiente de la tangente de la funcion en ese punto.
 
 # 2: Diferencial
+Primero que todo, hago una introduccion al tema citando a un canal al que le tengo bastante apego.
+
+{{<youtube T3w5WFDdPC8>}}
+
+Entonces podemos conceptualizar un diferencial como una **aproximacion** del cambio de una funcion usando la recta tangente en vez de la curva real de la funcion. Entonces tenemos la siguiente interpretacion:
+
+![introduccion-a-la-diferencial.png](https://i.postimg.cc/cJZPvkqX/introduccion-a-la-diferencial.png)
+
+> Es importante destacar que la pendiente de la recta tangente se representa con *dy*/*dx*
+
+Entonces podemos usar la diferencial de la funcion para predecir el comportamiento de la funcion con un incremento de acuerdo a la pendiente del valor puntual que se toma. En el ejemplo, la imagen de la funcion se aleja de la recta tangente entre mayor es el incremento.
+
+![diferencial.png](https://i.postimg.cc/FFp0GM3s/diferencial.png)
+
+La *diferencial* de una funcion es el producto de su derivada por la diferencial de la variable independiente (*dx*).
+
+![diferencial-intuitiva.png](https://i.postimg.cc/rwHf5htH/diferencial-intuitiva.png)
+
+Se tiene que tener en cuenta que *dy* es dependiente de *dx* en el contexto local de la operacion, ya que no podemos tratar con esos mismos valores en otro contexto ajeno a su relacion.
+
+# 3: Teorema de Rolle
+Considero que el [Teorema de Rolle](https://es.wikipedia.org/wiki/Teorema_de_Rolle) es algo conceptualmente intuitivo, y da base al analisis de funciones mediante uso de la derivada como herramienta.
+
+![Rolle.png](https://i.postimg.cc/mDgt3G1z/Rolle.png)
+
+Lo que dice el Teorema de Rolle es que si tenemos dos puntos cualesquiera en la imagen donde se cumple que *f(a) = f(b)* (digase que estan "al mismo nivel"), entonces habra un punto en dicho intervalo donde la derivada (la pendiente de la recta tangente respecto a un punto) sera igual a 0, por lo que en ese valor puntual no habra crecimiento ni decrecimiento. 
+
+Si en un punto no hay crecimiento ni decrecimiento, digase, que *f'(x) = 0*, entonces a este se le llama **punto critico**, y un candidato a **maximo** o **minimo**, ya sea **local** o **global**.
+
+> Un [punto critico](https://es.wikipedia.org/wiki/Punto_cr%C3%ADtico_(matem%C3%A1tica)) puede darse si bien la funcion no es diferenciable en ese punto o si *f'(x) = 0*, donde se llega a un **punto estacionario** de la funcion.
+
+Igual hablaremos mas a detalle sobre puntos criticos, maximos y minimos cuando entremos mas a fondo en analisis de funciones, por ahora la idea de Rolle es el tener un punto estacionario dado que tenemos dos puntos en la curvatura que tienen la misma imagen.
+
+# 4: Teoremas del valor medio y de Cauchy
+Empezando por el [Teorema del valor medio](https://es.wikipedia.org/wiki/Teorema_del_valor_medio), este sigue una idea similar a Rolle, pero ampliado mas alla de buscar un punto estacionario; en Rolle buscamos un punto en el que la pendiente sea paralela al eje x con una pendiente 0 en su recta tangente. 
+
+En el Teorema del valor medio buscamos algo similar, tendremos **dos puntos en la funcion**, por lo que comprendemos una **secante** que corta en esos dos puntos. El teorema dice que habra algun punto intermedio en el que la recta tangente sea paralela a dicha secante.
+
+![Lagrange.png](https://i.postimg.cc/DyZtXffn/Lagrange.png)
+
+[Cauchy](https://es.wikipedia.org/wiki/Teorema_del_valor_medio_de_Cauchy) es una generalizacion del Teorema del valor medio que vimos anteriormente, este establece la base para la regla de L'Hopital, una herramienta muy pesada para simplificar el operar con limites.
+
+![Cauchy.png](https://i.postimg.cc/4xDfPLBc/Cauchy.png)
+
+Conceptualmente sigue la misma idea que el Teorema de Lagrange, pero introduce esta identidad interesante que nos sirve bastante.
+
+{{<youtube 4-XN0Pilhcw>}}
+
+Por ultimo, una ecuacion utilizando cauchy:
+
+![Ejercicio-Cauchy.png](https://i.postimg.cc/65328P8n/Ejercicio-Cauchy.png)
+
+# 5: Regla de L'Hopital y algunos limites interesantes
+Con [la regla de L'Hopital](https://es.wikipedia.org/wiki/Regla_de_l%27H%C3%B4pital) podemos salvar algunas indeterminaciones de una forma mucho mas trivial de lo que habiamos visto anteriormente, e incluso llega a ser una ruta alternativa frente a limites que antes veiamos como imposibles de salvar!
+
+Se fundamenta fuertemente en el Teorema del valor medio de Cauchy, y se define de la siguiente manera:
+
+![Lhopital.png](https://i.postimg.cc/rmMKCV9P/Lhopital.png)
+
+Por lo que para escenarios de *0/0* o *+-inf/+-inf*, podemos solucionar de forma trivial utilizando derivadas y L'Hopital. Y ademas se pueden presentar situaciones bellas en las que podemos reescribir una expresion para causar un escenario con solucion posible mediante L'Hopital, es una herramienta muy versatil.
+
+A continuacion, el desarrollo de algunos limites mediante L'Hopital:
+
+![Lhopital-ejercicios.png](https://i.postimg.cc/66yFBDn9/Lhopital-ejercicios.png)
+
+# 6: Derivadas sucesivas
+Ya entrando en analisis de funciones, nosotros podemos usar como herramienta la derivada; de tal forma en la que podemos estudiar una funcion y valores puntuales relevantes de esta sin tener que recurrir a una grafica o software para tener precision.
+
+La herramienta principal que utilizaremos seran las derivadas primera, segunda y tercera. Con estas derivadas nos referimos a literalmente derivar multiples veces consecutivas para conseguir diferentes significados en cada una de ellas.
+
+![derivadas-sucesivas.png](https://i.postimg.cc/76xDBXWb/derivadas-sucesivas.png)
