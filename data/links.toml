@@ -26,3 +26,13 @@ description = "Blog de opinión."
 title = "maurycyz.com"
 url   = "https://maurycyz.com/"
 description = "Blog sobre electronica, software, fotografia y quimica."
+
+[[links]]
+title = "ratfactor.com"
+url   = "https://ratfactor.com/"
+description = "Blog con mucha antiguedad y actividad."
+
+[[links]]
+title = "thingspool.net"
+url   = "https://thingspool.net/"
+description = "Gamedev, web y matematica."
