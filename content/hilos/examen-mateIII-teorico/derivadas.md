@@ -115,4 +115,4 @@ Simplemente buscamos la inversa y derivamos dicha funcion. Lo unico relevante, y
 
 ---
 # Extra: Algunas demostraciones adicionales 
-> Despues agrego algunas practicas en este apartado
+> Con el tiempo ire agregando ejemplos en este apartado

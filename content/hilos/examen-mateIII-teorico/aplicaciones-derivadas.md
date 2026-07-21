@@ -90,3 +90,45 @@ Ya entrando en analisis de funciones, nosotros podemos usar como herramienta la 
 La herramienta principal que utilizaremos seran las derivadas primera, segunda y tercera. Con estas derivadas nos referimos a literalmente derivar multiples veces consecutivas para conseguir diferentes significados en cada una de ellas.
 
 ![derivadas-sucesivas.png](https://i.postimg.cc/76xDBXWb/derivadas-sucesivas.png)
+
+la primera derivada nos da la pendiente de la recta tangente de ese punto, la segunda derivada nos indica concavidad y la tercera nos puede ayudar a encontrar puntos de inflexion (cambio de concavidad).
+
+# 7: Analisis de funciones y sus herramientas
+La idea de estudiar una funcion con derivadas, es que podemos encontrar valores puntuales de la funcion que sean relevantes para entender el comportamiento de esta. Puede llegar a ser complicado a simple vista indicar en que valor puntual de *x* se genera un cambio de concavidad en *f(x)*, por lo que es mucho mas intuitivo usar las herramientas que hemos desarrollado hasta este punto (limites y derivadas) para poder estudiar este comportamiento de una funcion *f(x)*.
+
+![figura-para-analisis-de-funcion.png](https://i.postimg.cc/xCswN1Cj/figura-para-analisis-de-funcion.png)
+
+## Puntos criticos
+Me atrevo a empezar este tema hablando de **puntos criticos** (los mencionamos anteriormente cuando hablamos de Rolle), que nos van a simplificar el trabajo al **dividir la funcion en intervalos** separados por puntos de interes; estas divisiones seran marcadas por puntos criticos en la funcion, por lo que podremos tomar trozos distintos y determinar su crecimiento o decrecimiento, y concavidad.
+
+![punto-critico.png](https://i.postimg.cc/SsgC8wCv/punto-critico.png)
+
+Ya que dividimos en intervalos, podemos analizar cada intervalo por separado, modulando el estudio de la funcion.
+
+## Extremos relativos
+Empecemos hablando sobre crecimiento y decrecimiento.
+> Supongamos un intervalo centrado en *a* y cualquier valor x dentro de ese intervalo. Si *x < a*, entonces *f(x) < f(a)* y decimos que el intervalo es **creciente**. En cambio, si *x<a* y *f(x) > f(a)*, entonces estamos hablando de un intervalo **decreciente**.
+
+Ademas, podemos verlo tambien de forma intuitiva mediante el uso de la derivada primera, ya que al ser la pendiente de la recta tangente, y al haber separado la funcion previamente en intervalos separados por puntos criticos, entonces **basta con probar para un valor del intervalo**, ver si la pendiente para ese punto es positiva o negativa, y con base a eso puedes tomar conclusiones sobre todo el intervalo, ya que solo habra un cambio en el signo de la pendiente a partir del punto critico, y nosotros ya conocemos donde se encuentran estos puntos.
+
+Entonces como extremos relativos nos referimos a un valor maximo o minimo dependiendo de la informacion del **entorno del punto critico en cuestion**, ya que si por izquierda es creciente y por derecha decreciente, entonces hablamos de un **valor maximo relativo**, y si por izquierda es decreciente y por derecha creciente, es un **valor minimo relativo**. Esta informacion la podremos conseguir a partir del estudio previamente mencionado en los intervalos.
+
+Ejemplifiquemos:
+
+![extremos-relativos.png](https://i.postimg.cc/fyBCz8w3/extremos-relativos.png)
+
+Ademas, tambien hay forma de plantear maximos y minimos a partir de la derivada segunda, ya que nos da informacion sobre la concavidad en ese punto (mas de esto en el apartado que viene).
+
+## Concavidad
+Como mencionamos anteriormente, podemos usar la derivada segunda para saber si un punto critico sera un extremo relativo maximo o minimo, pero tambien **nos da informacion sobre la concavidad de dicho valor puntual**. Si la derivada segunda nos da un valor positivo, hablamos de una concavidad hacia arriba (un minimo), y si nos da un valor negativo, hablamos de una concavidad hacia abajo (un maximo).
+
+![concavidad.png](https://i.postimg.cc/QxxGSYV8/concavidad.png)
+
+Por lo que de forma simplificada podemos determinar si hay un maximo o minimo. Ahora, si la derivada segunda nos da *f''(x) = 0*, tenemos un **candidato a punto de inflexion**, que probaremos con la derivada tercera o analizando su entorno.
+
+## Puntos de inflexion
+
+---
+
+# Extra: Algunas funciones analizadas
+> Con el tiempo ire agregando ejemplos en este apartado
