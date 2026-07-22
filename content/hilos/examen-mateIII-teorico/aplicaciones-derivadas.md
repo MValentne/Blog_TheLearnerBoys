@@ -122,11 +122,31 @@ Ademas, tambien hay forma de plantear maximos y minimos a partir de la derivada 
 ## Concavidad
 Como mencionamos anteriormente, podemos usar la derivada segunda para saber si un punto critico sera un extremo relativo maximo o minimo, pero tambien **nos da informacion sobre la concavidad de dicho valor puntual**. Si la derivada segunda nos da un valor positivo, hablamos de una concavidad hacia arriba (un minimo), y si nos da un valor negativo, hablamos de una concavidad hacia abajo (un maximo).
 
+Ahora, que es la concavidad?
+
+> Que un punto sea **concavo hacia arriba** significa que la curva de la funcion esta por arriba de la recta tangente en ese punto, y bajo la misma logica, que un punto sea **concavo hacia abajo** significa que la curva de la funcion pasa por debajo de la recta tangente en ese punto.
+
 ![concavidad.png](https://i.postimg.cc/QxxGSYV8/concavidad.png)
 
 Por lo que de forma simplificada podemos determinar si hay un maximo o minimo. Ahora, si la derivada segunda nos da *f''(x) = 0*, tenemos un **candidato a punto de inflexion**, que probaremos con la derivada tercera o analizando su entorno.
 
 ## Puntos de inflexion
+Cuando hablamos de un [punto de inflexion](https://es.wikipedia.org/wiki/Punto_de_inflexi%C3%B3n), nos referimos a un punto en el que se **transiciona de una concavidad a otra**. Para encontrar estos puntos, basta con igualar la segunda derivada a 0 (*f''(x) = 0*), en cuyo caso sera un **candidato a punto de inflexion**, y debera cumplir tambien *f'''(x) != 0*, por lo que tenemos:
+
+> Si *f''(x) = 0* y ademas *f'''(x) != 0*, entonces es un punto de inflexion.
+
+![punto-de-inflexion.png](https://i.postimg.cc/fRRTQMKp/punto-de-inflexion.png)
+
+Por lo que ahora conocemos que en *x = 0* hay un cambio de concavidad.
+
+## Analisis completo de la funcion
+Ya vimos todas las herramienas para poder estudiar los puntos relevantes en una funcion de una variable, ahora uniendo todos esos conceptos, junto a algunas cuestiones elementales, podemos modelar una funcion monovariable con exactitud.
+
+![estudio-completo.png](https://i.postimg.cc/T17Kbh2q/estudio-completo.png)
+
+Y con el uso trivial de derivadas pudimos estudiar una funcion de forma intuitiva. De haber sido una funcion racional, hubiera sido de interes el estudiar el comportamiento de la funcion al infinito, por lo que podriamos haber usado L'Hopital para saber si hay alguna asintota horizontal.
+
+Mas adelante volveremos a ver calculo diferencial en forma de ecuaciones diferenciales, por lo que sera de interes tener agilizados los conceptos de funcion explicita y su derivada, y los diferenciales.
 
 ---
 
