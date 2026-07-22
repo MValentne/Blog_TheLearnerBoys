@@ -1,6 +1,6 @@
 +++
 date = '2026-07-18T20:24:04-03:00'
-draft = true
+draft = false
 title = 'Aplicaciones Derivadas'
 author = 'Valen'
 keywords = ["calculo", "derivadas", "calculo diferencial"]
