@@ -3,7 +3,7 @@ date = '2026-07-16T11:09:32-03:00'
 draft = false
 title = 'Derivadas'
 author = 'Valen'
-keywords = ["calculo", "limites", "continuidad"]
+keywords = ["calculo", "derivadas", "calculo diferencial"]
 categories = ["Matematica"]
 toc = true
 tocBorder = true
@@ -115,4 +115,4 @@ Simplemente buscamos la inversa y derivamos dicha funcion. Lo unico relevante, y
 
 ---
 # Extra: Algunas demostraciones adicionales 
-> Despues agrego algunas practicas en este apartado
+> Con el tiempo ire agregando ejemplos en este apartado
