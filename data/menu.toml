@@ -42,8 +42,13 @@ title = "info"
 
   [[entries.entries]]
   # Servicio de hosting de imágenes usado para subir imágenes a los posts
-  title = "[image host]"
+  title = "[image host A]"
   url = "https://postimages.org/"
+
+  [[entries.entries]]
+  # Servicio de hosting de imágenes usado para subir imágenes a los posts
+  title = "[image host B]"
+  url = "https://imgbb.com/"
 
 
 # ------------------------------------------------------------------
