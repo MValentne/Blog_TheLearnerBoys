@@ -121,7 +121,7 @@ Lo cual ejecuta una serie de comandos que son redundantes para el alcance de est
 
 Y Ta-dah, a este punto ya habran creado su primera publicacion en el blog, lo cual es algo bastante lindo. Es un lindo proyecto y se puede aprender bastante, ya que en cada post podemos usar libertad artistica completa en temas y estructura de lo que querramos decir. La idea de el blog es que quede como un registro perpetuo de lo que vayamos publicando, y podamos volver a esto en un futuro y ver que babosadas deciamos y pensabamos en su momento. Sin mas que eso, diviertanse publicando y sugiriendo mejoras para el proyecto.
 
-<img src="https://www.gifsanimados.org/data/media/56/computadora-y-ordenador-imagen-animada-0178.gif" border="0" alt="computadora-y-ordenador-imagen-animada-0178" /></a>
+![computadora-y-ordenador-imagen-animada-0178](https://www.gifsanimados.org/data/media/56/computadora-y-ordenador-imagen-animada-0178.gif)
 
 
 [^1]: La abstraccion consiste en formar un modelo mental en el que solo tomamos en cuenta factores relevantes para el problema que queremos solucionar. En este caso, Hugo abstrae la necesidad de trabajar con html y css, ya que solo metemos mano en markdown y damos por sentado que se va a generar un frontend automaticamente.
