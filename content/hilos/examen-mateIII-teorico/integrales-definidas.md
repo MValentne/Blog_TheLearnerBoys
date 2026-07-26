@@ -1,6 +1,6 @@
 +++
 date = '2026-07-24T15:40:37-03:00'
-draft = true
+draft = false
 title = 'Integrales Definidas'
 author = 'Valen'
 keywords = ["calculo", "integrales", "calculo integral"]
