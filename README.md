@@ -91,6 +91,30 @@ Tu contenido acá en Markdown...
 - Para embeber un video de YouTube, usá el shortcode: `{{< youtube ID_DEL_VIDEO >}}`
 - Para subir imágenes usá [postimages.org](https://postimages.org/) y pegá la URL directa en el Markdown
 
+### Fórmulas y diagramas
+
+KaTeX y Mermaid están disponibles en todas las páginas. Para fórmulas usá `$E = mc^2$` dentro de una línea o `$$...$$` para una fórmula en bloque:
+
+```markdown
+La identidad es $E = mc^2$.
+
+$$
+\int_a^b f(x)\,dx
+$$
+```
+
+Para diagramas, usá un bloque de código con el lenguaje `mermaid`:
+
+````markdown
+```mermaid
+flowchart LR
+  A[Markdown] --> B[Hugo]
+  B --> C[Diagrama]
+```
+````
+
+Los recursos se cargan desde jsDelivr, por lo que el navegador necesita conexión al abrir una página que los use.
+
 ---
 
 ## Publicar en GitHub Pages

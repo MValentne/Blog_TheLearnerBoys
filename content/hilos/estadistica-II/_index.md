@@ -1,6 +1,6 @@
 +++
 date = '2026-07-29T16:00:46-03:00'
-draft = true
+draft = false
 title = 'Notas sobre Estadistica II'
 author = 'Valen'
 keywords = ["estadistica", "notas de cursada"]
@@ -20,6 +20,6 @@ El contenido de la materia se estructura de la siguiente forma:
 4. Analisis de regresion y correlacion simple
 5. Numeros, indices y series temporales
 
-Para todo el contexto previo de Estadistica uno, visitar [este enlace](), una serie de videos hechos por mi explicando la materia.
+Para todo el contexto previo de Estadistica I, visitar [este enlace](https://www.youtube.com/playlist?list=PLcTGxB82zQPPkGcuCw-wArKj4lZaiI6mh), una serie de videos hechos por mi, explicando la materia.
 
 # Entradas:

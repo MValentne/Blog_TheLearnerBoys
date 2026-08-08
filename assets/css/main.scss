@@ -204,6 +204,13 @@ details[open] summary {
   padding: 1rem;
 }
 
+// Diagramas Mermaid: ocupan el ancho disponible sin desbordarse en móvil.
+.mermaid svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
 
 // ==============================================================
 // SECCIÓN 2: ESTILOS CUSTOM DEL PROYECTO (TheLearnerBoys)

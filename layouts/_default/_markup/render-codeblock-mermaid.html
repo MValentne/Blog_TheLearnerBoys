@@ -1,0 +1,2 @@
+{{- /* Renderiza los bloques Markdown marcados con ```mermaid. */ -}}
+<pre class="mermaid">{{ .Inner | strings.TrimSuffix "\n" }}</pre>
