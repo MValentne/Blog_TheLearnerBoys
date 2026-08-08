@@ -4,7 +4,7 @@ draft = false
 title = 'Notas sobre Estadistica II'
 author = 'Valen'
 keywords = ["estadistica", "notas de cursada"]
-category = ["Estadistica"]
+categories = ["Estadistica"]
 +++
 
 El proposito de este material es dar un repaso en forma de carpeta proceso sobre mi cursada de Estadistica II.
