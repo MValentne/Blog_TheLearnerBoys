@@ -4,7 +4,7 @@ draft = false
 title = 'Inferencia Estadistica'
 author = 'Valen'
 keywords = ["inferencia", "repaso", "conceptos base"]
-category = ["Estadistica"]
+categories = ["Estadistica"]
 toc = true
 tocBorder = true
 +++
