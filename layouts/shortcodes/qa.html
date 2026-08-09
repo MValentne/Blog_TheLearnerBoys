@@ -1,0 +1,29 @@
+{{/*
+  Shortcode: qa.html
+  Descripción: Componente desplegable (<details>) para mostrar preguntas/ejercicios y sus soluciones.
+
+  Parámetros:
+    - q (string, opcional): Pregunta o título del elemento. Soporta sintaxis Markdown. También se puede pasar posicionalmente: {{< qa "Pregunta" >}}
+    - badge (string, opcional): Etiqueta personalizada que acompaña a la pregunta. Por defecto: "Pregunta / Ejercicio".
+
+  Ejemplos de uso en archivos Markdown (.md):
+
+  1. Uso estándar:
+     {{< qa q="¿Qué es una función en JavaScript?" >}}
+       Es un bloque de código diseñado para realizar una tarea específica.
+     {{< /qa >}}
+
+  2. Uso con badge personalizado:
+     {{< qa q="Calcula el área de un círculo de radio 5" badge="Ejercicio 1" >}}
+       La fórmula es `A = π * r²`. Por lo tanto, `A = 3.1416 * 25 = 78.54`.
+     {{< /qa >}}
+*/}}
+<details class="qa-box">
+  <summary class="qa-summary">
+    <span class="qa-badge">{{ .Get "badge" | default "Pregunta" }}</span>
+    <span class="qa-title">{{ (.Get "q" | default (.Get 0)) | markdownify }}</span>
+  </summary>
+  <div class="qa-content">
+    {{ .Inner | markdownify }}
+  </div>
+</details>
