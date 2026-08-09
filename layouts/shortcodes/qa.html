@@ -1,4 +1,4 @@
-{{/* 
+{{/*
   Shortcode: qa.html
   Descripción: Componente desplegable (<details>) para mostrar preguntas/ejercicios y sus soluciones.
 
@@ -20,7 +20,7 @@
 */}}
 <details class="qa-box">
   <summary class="qa-summary">
-    <span class="qa-badge">{{ .Get "badge" | default "Pregunta / Ejercicio" }}</span>
+    <span class="qa-badge">{{ .Get "badge" | default "Pregunta" }}</span>
     <span class="qa-title">{{ (.Get "q" | default (.Get 0)) | markdownify }}</span>
   </summary>
   <div class="qa-content">
