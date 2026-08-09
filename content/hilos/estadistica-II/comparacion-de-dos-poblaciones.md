@@ -321,22 +321,93 @@ $$\begin{cases} \text{si } Z_{exp} \leq Z_{teo} \implies \text{no rechazamos } H
 # Unas ultimas preguntas a resolver
 Estas son preguntas integradoras con la finalidad de dejar en claro lo clave de este capitulo.
 
-{{<qa q="Si quiero comparar los poblaciones ¿qué parámetros puedo utilizar y cuáles son sus correspondientes estimadores?" >}}
-
+{{<qa q="Si quiero comparar las poblaciones ¿qué parámetros puedo utilizar y cuáles son sus correspondientes estimadores?" >}}
+Vimos que para comparar poblaciones, nosotros estimamos con base a informacion de la muestra; nuestros estimadores. En este capitulo vimos estimadores puntuales e intervalos de confianza, pero en este caso mencionaremos los puntuales directos. Para la diferencia de medias usamos $\Delta \bar{x}$ y para la diferencia de proporciones usamos $\Delta \bar{p}$.
 {{< /qa >}}
 
 {{<qa q="¿Cómo debe ser el muestreo, cual es el principal y cuales otros se menciona ?" >}}
-
+El muestreo debe ser probabilistico, de caracter aleatorio; esto para asegurar que la muestra sea significante respecto a la poblacion. El principal y mas común es le muestreo simple, en el que cada elemento de la poblacion tiene la misma probabilidad de ser escogido en la muestra. Si bien no mencionamos los otros (mala mia), tenemos por ejemplo el muestreo estratificado, en el que se divide la poblacion en subgrupos y se escogen elementos de cada subgrupo con una probabilidad diferente. El muestreo por conglomerados, en el que se agrupan elementos de la poblacion y se escogen conglomerados enteros. Y por ultimo el muestreo sistematico, en el que se escogen elementos de la poblacion de manera sistematica mediante una secuencia regular.
 {{< /qa >}}
 
 {{<qa q="¿Qué debemos estudiar de los estimadores y cuáles son los pasos obligados de la estadística inferencial?" >}}
+En primer lugar buscamos que el estimador se asemeje al parametro poblacional, ese es su principal proposito. Buscamos que a medida que $n \to \infty$, los estimadores converjan a los valores poblacionales. Por lo que a mayor muestra, estos teoricamente deberian asemejarse mas al comportamiento poblacional. Buscamos que este aproveche la mayor informacion posible de la muestra, es decir, que la muestra sea lo mas representativa posible de la poblacion.
 
+La aplicacion de la estadistica inferencial pasa por tres etapas:
+1. Entender como se comporta el estadistico
+2. Estimar los parametros
+3. Realizar un contraste de prueba de hipotesis
 {{< /qa >}}
 
 {{<qa q="Presentar simbólicamente las distribuciones en el muestreo de los estimadores diferencia de las medias (muestra chicas y desvío desconocido ) y el de diferencia de proporciones poblacionales ." >}}
+**1. Diferencia de medias (muestras pequeñas y desvíos poblacionales desconocidos pero asumiendo homocedasticidad $\sigma\_1^2 = \sigma\_2^2$):**
 
+Si las poblaciones son normales y se asume homocedasticidad, el estadístico pivot se distribuye según una *t* de Student con $n\_1 + n\_2 - 2$ grados de libertad:
+
+$$T = \dfrac{(\bar{X}\_1 - \bar{X}\_2) - (\mu\_1 - \mu\_2)}{S\_p \sqrt{\dfrac{1}{n\_1} + \dfrac{1}{n\_2}}} \sim t\_{n\_1 + n\_2 - 2}$$
+
+donde $S\_p^2 = \dfrac{(n\_1-1)S\_1^2 + (n\_2-1)S\_2^2}{n\_1+n\_2-2}$ es la varianza combinada.
+
+---
+
+**2. Diferencia de proporciones poblacionales:**
+
+Si se cumplen las condiciones de normalidad ($n\_i \phi\_i \geq 5$ y $n\_i (1-\phi\_i) \geq 5$ para $i=1,2$), la diferencia de proporciones muestrales se distribuye aproximadamente Normal:
+
+$$(\hat{P}\_1 - \hat{P}\_2) \sim N\left(\phi\_1 - \phi\_2, \, \dfrac{\phi\_1(1-\phi\_1)}{n\_1} + \dfrac{\phi\_2(1-\phi\_2)}{n\_2}\right)$$
+
+y su estandarización es:
+
+$$Z = \dfrac{(\hat{P}\_1 - \hat{P}\_2) - (\phi\_1 - \phi\_2)}{\sqrt{\dfrac{\phi\_1(1-\phi\_1)}{n\_1} + \dfrac{\phi\_2(1-\phi\_2)}{n\_2}}} \sim N(0,1)$$
 {{< /qa >}}
 
 {{<qa q="Presentar las fórmulas más relevantes del capítulo (errores estándar , intervalos de confianza y estadísticos de prueba)." >}}
+### 1. Errores Estándar ($SE$)
 
+* **Diferencia de medias ($\sigma$ conocida):**
+
+  $$SE = \sqrt{\dfrac{\sigma\_1^2}{n\_1} + \dfrac{\sigma\_2^2}{n\_2}}$$
+
+* **Diferencia de medias homocedácticas ($\sigma$ desconocida, $\sigma\_1 = \sigma\_2$):**
+
+  $$SE = S\_p \sqrt{\dfrac{1}{n\_1} + \dfrac{1}{n\_2}} \quad \text{con } S\_p = \sqrt{\dfrac{(n\_1-1)S\_1^2 + (n\_2-1)S\_2^2}{n\_1+n\_2-2}}$$
+
+* **Diferencia de proporciones (estimación / contraste general $d\_0 \neq 0$):**
+
+  $$SE = \sqrt{\dfrac{\hat{p}\_1(1-\hat{p}\_1)}{n\_1} + \dfrac{\hat{p}\_2(1-\hat{p}\_2)}{n\_2}}$$
+
+* **Diferencia de proporciones (contraste con $H\_0: \phi\_1 = \phi\_2$):**
+
+  $$SE = \sqrt{\hat{p}(1-\hat{p})\left(\dfrac{1}{n\_1} + \dfrac{1}{n\_2}\right)} \quad \text{con } \hat{p} = \dfrac{x\_1 + x\_2}{n\_1 + n\_2}$$
+
+---
+
+### 2. Intervalos de Confianza (I.C.)
+
+* **Diferencia de medias ($\sigma$ conocida o $n \geq 30$):**
+
+  $$(\bar{x}\_1 - \bar{x}\_2) \pm z\_{1-\alpha/2} \cdot \sqrt{\dfrac{\sigma\_1^2}{n\_1} + \dfrac{\sigma\_2^2}{n\_2}}$$
+
+* **Diferencia de medias homocedácticas ($\sigma$ desconocida, $n < 30$):**
+
+  $$(\bar{x}\_1 - \bar{x}\_2) \pm t\_{1-\alpha/2, \, n\_1+n\_2-2} \cdot S\_p \sqrt{\dfrac{1}{n\_1} + \dfrac{1}{n\_2}}$$
+
+* **Diferencia de proporciones:**
+
+  $$(\hat{p}\_1 - \hat{p}\_2) \pm z\_{1-\alpha/2} \cdot \sqrt{\dfrac{\hat{p}\_1(1-\hat{p}\_1)}{n\_1} + \dfrac{\hat{p}\_2(1-\hat{p}\_2)}{n\_2}}$$
+
+---
+
+### 3. Estadísticos de Prueba (de Contraste / Experimentales)
+
+* **Diferencia de medias ($\sigma$ conocida):**
+
+  $$Z\_{exp} = \dfrac{(\bar{x}\_1 - \bar{x}\_2) - d\_0}{\sqrt{\dfrac{\sigma\_1^2}{n\_1} + \dfrac{\sigma\_2^2}{n\_2}}}$$
+
+* **Diferencia de medias homocedácticas ($\sigma$ desconocida):**
+
+  $$t\_{exp} = \dfrac{(\bar{x}\_1 - \bar{x}\_2) - d\_0}{S\_p \sqrt{\dfrac{1}{n\_1} + \dfrac{1}{n\_2}}}$$
+
+* **Diferencia de proporciones (para probar $H\_0: \phi\_1 = \phi\_2$):**
+
+  $$Z\_{exp} = \dfrac{\hat{p}\_1 - \hat{p}\_2}{\sqrt{\hat{p}(1-\hat{p})\left(\dfrac{1}{n\_1} + \dfrac{1}{n\_2}\right)}}$$
 {{< /qa >}}
