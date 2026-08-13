@@ -18,6 +18,11 @@
 # ------------------------------------------------------------------
 
 [[links]]
+title = "cses.fi"
+url   = "https://cses.fi/"
+description = "Problemas de programación competitiva."
+
+[[links]]
 title = "j3s.sh"
 url   = "https://j3s.sh/now.html"
 description = "Blog de opinión."
