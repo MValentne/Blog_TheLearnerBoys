@@ -119,9 +119,16 @@ Los recursos se cargan desde jsDelivr, por lo que el navegador necesita conexió
 
 ## Publicar en GitHub Pages
 
+En Linux / macOS / Git Bash:
 ```bash
 bash deploy.sh
 ```
+
+En Windows (PowerShell o doble clic en `deploy.bat`):
+```powershell
+.\deploy.ps1
+```
+
 
 El script hace todo automáticamente:
 
@@ -165,7 +172,9 @@ Blog_Project/
 │   └── hugo-theme-nostyleplease/  # Submódulo git — NO editar directamente
 │
 ├── hugo.toml                # Configuración principal de Hugo
-├── deploy.sh                # Script de deploy a GitHub Pages
+├── deploy.sh                # Script de deploy para Linux/macOS/Git Bash
+├── deploy.ps1               # Script de deploy nativo para PowerShell
+├── deploy.bat               # Lanzador de deploy para Windows (doble clic)
 └── .gitmodules              # Declaración del submódulo del tema
 ```
 
