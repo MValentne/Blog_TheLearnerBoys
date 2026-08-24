@@ -75,6 +75,16 @@ url = "hilos"
 
 
 # ------------------------------------------------------------------
+# SECCIÓN: la pared
+# Galería de dibujos colgados en una pared. Para agregar dibujos,
+# crear .md nuevos en content/pared/ (ver _index.md de esa carpeta).
+# ------------------------------------------------------------------
+[[entries]]
+title = "la pared"
+url = "pared"
+
+
+# ------------------------------------------------------------------
 # SECCIÓN: categories
 # Widget de categorías con conteo de posts por categoría.
 # Requiere: layouts/partials/menu_item.html (override en layouts/ raíz)

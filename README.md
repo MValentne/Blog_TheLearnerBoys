@@ -237,3 +237,17 @@ show_categories = true
 Los archivos de favicon están en `static/` y son referenciados desde `layouts/partials/head.html`.
 
 Para regenerarlos (si cambian el logo), subir la imagen a [realfavicongenerator.net](https://realfavicongenerator.net/), descargar el paquete y reemplazar los archivos en `static/`.
+
+---
+
+## La pared (galería de dibujos)
+
+Los marcos de los cuadros son fotografías reales de molduras antiguas de Wikimedia Commons, recortadas con el interior transparente y aplicadas con `border-image`. Los derivados (roble, negro, blanco) son retintes de la misma foto para conservar la textura real de la talla.
+
+| Archivo (`static/img/marcos/`) | Origen | Licencia |
+|---|---|---|
+| `dorado.png` | [Moldura del *Marte desarmado por Venus* de J.-L. David](https://commons.wikimedia.org/wiki/File:Jacques-louis_david,_marte_disarmato_da_venere,_1824,_picture_frame.png) — foto de Sailko | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.es) |
+| `clasico.png` | [Cornice senese](https://commons.wikimedia.org/wiki/File:Cornice_senese.jpg) — Wikimedia Commons | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.es) |
+| `roble.png` / `negro.png` / `blanco.png` | Derivados de `clasico.png` (retinte de color, misma talla real) | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.es) |
+
+El fondo de tapizado es un patrón SVG propio generado en `static/img/tapizado.svg`.

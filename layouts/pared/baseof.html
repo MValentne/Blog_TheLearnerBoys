@@ -1,0 +1,29 @@
+{{- /*
+  ============================================================
+  BASEOF: layouts/pared/baseof.html
+  ============================================================
+  Baseof exclusivo de la sección "la pared". Hugo lo usa en lugar
+  del baseof general porque los layouts de pared viven en
+  layouts/pared/ (misma resolución por carpeta que hace el tema
+  con layouts/posts/baseof.html).
+
+  DIFERENCIA CON EL BASEOF GENERAL:
+    - NO incluye el footer (saca el GIF decorativo de footer.md).
+    - Le pone una clase al <body> según el tipo de página:
+        pared-section -> la pared (list.html)
+        pared-page    -> detalle de un dibujo (single.html)
+      El CSS de main.scss usa esas clases para pintar el tapizado
+      en toda la página o el fondo oscuro del detalle.
+  ============================================================
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    <body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}" class="pared-doc pared-{{ .Kind }}">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+                {{- block "main" . }}{{- end }}
+            </div>
+        </main>
+    </body>
+</html>

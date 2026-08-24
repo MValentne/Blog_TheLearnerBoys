@@ -335,3 +335,342 @@ details.qa-box {
   }
 }
 
+// ---------------------------------------------------------------
+// LA PARED (galería de dibujos)
+// Sección del menú que muestra dibujos colgados desordenadamente
+// sobre un tapizado antiguo que cubre TODA la página.
+// Layouts: layouts/pared/{baseof,list,single}.html
+//
+// Estructura:
+//   body.pared-section     -> la pared (list.html), tapizado global
+//   body.pared-page        -> detalle (single.html), tapizado + tinta sepia
+//   .pared-pagina          -> wrapper con el tapizado (página entera)
+//   .pared-wall            -> flex con wrap: la pared crece hacia
+//                             abajo sola según se agreguen cuadros
+//   .pared-cuadro          -> cada cuadro colgado (ancho/inclinación
+//                             variables vía inline styles del layout)
+//   .marco-*               -> marcos antiguos dibujados con SVG
+//                             (border-image), reusados en el detalle
+//   .pared-modal           -> overlay oscurecido con iframe flotante
+//   .pared-detalle*        -> tipografía grande tipo museo del detalle
+// ---------------------------------------------------------------
+
+// Ancho de página: la pared y el detalle necesitan más espacio que
+// el resto del sitio (el .w del tema es de 640px).
+body.pared-section {
+  background-color: #e9ddc4; // evita flash blanco en el overscroll
+}
+
+body.pared-section .w {
+  max-width: 1150px;
+  padding: 0;
+}
+
+body.pared-page .w {
+  max-width: none;
+  padding: 0;
+}
+
+// La pared completa: el tapizado cubre toda la página y se extiende
+// hacia abajo junto con el contenido. El fondo fijo da la sensación
+// de que la cámara no se mueve aunque la pared siga creciendo.
+.pared-pagina {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 3rem clamp(1rem, 4vw, 3rem) 5rem;
+  background-color: #e9ddc4;
+  background-image: var(--tapizado, none);
+  background-size: 380px auto;
+  background-attachment: fixed;
+  color: #3d2f1a;
+}
+
+.pared-volver {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #000;
+  font-size: 0.95rem;
+}
+
+.pared-volver:hover {
+  text-decoration: underline;
+}
+
+.pared-pagina h1 {
+  margin-top: 1.2rem;
+}
+
+// La pared en sí: flex con wrap. Los cuadros forman filas naturales
+// y NUNCA se superponen; al agregar más .md la pared se estira sola.
+.pared-wall {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(40px, 6vw, 72px) clamp(30px, 4vw, 52px);
+  max-width: 1050px;
+  margin: 3rem auto 0;
+}
+
+// Cada cuadro colgado. El ancho, el corrimiento vertical y la
+// inclinación vienen por inline styles desde list.html (ciclan entre
+// varios valores para dar el desorden sin cálculos manuales).
+.pared-cuadro {
+  position: relative;
+  display: block;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.2s ease, filter 0.2s ease;
+
+  img {
+    display: block;
+    width: 100%;
+    user-select: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: rotate(var(--rot, 0deg)) translateY(-6px) scale(1.03);
+    z-index: 5;
+  }
+
+  &:focus-visible {
+    outline: 3px dashed #6b5432;
+    outline-offset: 5px;
+  }
+}
+
+// En celulares los cuadros van más grandes (de a dos por fila)
+@media (max-width: 640px) {
+  .pared-cuadro {
+    width: 42% !important;   // gana al ancho inline del layout
+    margin-top: 0 !important;
+  }
+}
+
+// ===============================================================
+// MARCOS ANTIGUOS
+// Son FOTOS REALES de molduras antiguas de dominio público
+// (Wikimedia Commons), recortadas con el interior transparente y
+// usadas como border-image: cada esquina conserva su talla original
+// y los tramos laterales se estiran sin distorsión.
+//
+//   dorado  -> moldura dorada barroca real (Marco del David, 1824)
+//   clasico -> cornice senesa tallada en madera (foto)
+//   roble   -> derivado de la senesa, tono miel
+//   negro   -> derivado de la senesa, ébano
+//   blanco  -> derivado de la senesa, despintado crema
+//
+// Créditos y licencias en README.md (sección "La pared").
+// Valores válidos del front matter:
+//   frame = "clasico" | "dorado" | "negro" | "blanco" | "roble"
+// ===============================================================
+
+.marco-clasico,
+.marco-dorado,
+.marco-negro,
+.marco-blanco,
+.marco-roble {
+  box-sizing: border-box;
+  padding: clamp(10px, 1.4vw, 16px);       // passe-partout
+  background: linear-gradient(#f7f1e0, #efe6cf);
+  box-shadow: 0 12px 26px rgba(62, 42, 16, 0.38);
+
+  img {
+    box-shadow: 0 3px 12px rgba(50, 32, 10, 0.45); // vidrio hundido
+  }
+}
+
+// Dorado: foto real de moldura dorada al pan de oro
+.marco-dorado {
+  border: 22px solid transparent;
+  // slices medidos del PNG: distancia de cada borde al hueco interior
+  border-image: url("../img/marcos/dorado.png") 76 72 74 76 / 22px;
+}
+
+// Clásico: madera tallada natural (cornisa senesa)
+.marco-clasico {
+  border: 30px solid transparent;
+  border-image: url("../img/marcos/clasico.png") 279 274 278 274 / 30px;
+}
+
+// Roble: misma talla, acabado miel cálido
+.marco-roble {
+  border: 30px solid transparent;
+  border-image: url("../img/marcos/roble.png") 278 273 276 273 / 30px;
+}
+
+// Negro: misma talla, ébano antiguo
+.marco-negro {
+  border: 30px solid transparent;
+  border-image: url("../img/marcos/negro.png") 278 272 276 273 / 30px;
+}
+
+// Blanco: misma talla, pintura crema envejecida
+.marco-blanco {
+  border: 30px solid transparent;
+  border-image: url("../img/marcos/blanco.png") 245 240 244 241 / 30px;
+}
+
+// Los marcos siempre ajustan su imagen interna
+[class^="marco-"] > img,
+[class*=" marco-"] > img {
+  display: block;
+  width: 100%;
+}
+
+// ---------------------------------------------------------------
+// Modal: solo un velo oscuro cálido sobre la pared. Sin caja
+// blanca: el detalle flota directo sobre el fondo apagado.
+// ---------------------------------------------------------------
+.pared-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 14, 7, 0.78);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+
+  &.pared-modal-abierto {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.pared-modal-iframe {
+  // MIN en mayúsculas: si no, Sass intenta compilarlo y falla al
+  // mezclar unidades (vw con px). Así pasa como CSS nativo.
+  width: MIN(94vw, 900px);
+  height: MIN(90vh, 900px);
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  // Beige del tapizado: mientras carga el detalle no hay destello
+  // oscuro, se ve como parte de la pared desde el primer frame.
+  background: #e9ddc4;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+}
+
+.pared-modal-cerrar {
+  position: absolute;
+  top: 10px;
+  right: 22px;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: #f0e6d2;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+// ---------------------------------------------------------------
+// Detalle (contenido del iframe): minimalista tipo museo.
+// Cuadro con su marco antiguo y la información debajo. El fondo es
+// el MISMO tapizado de la pared: el modal se siente como acercarse
+// a la pared, no como otra pantalla. Tinta sepia sobre beige, con
+// buen contraste. Sin scroll: la página avisa su altura real al
+// padre vía postMessage.
+// ---------------------------------------------------------------
+body.pared-page {
+  // Mismos valores que .pared-pagina, pero fijos acá porque el
+  // single no recibe la variable --tapizado inline del list.
+  background-color: #e9ddc4;
+  background-image: url("../img/tapizado.svg");
+  background-size: 380px auto;
+  background-attachment: fixed;
+}
+
+.pared-detalle-pagina {
+  // SIN min-height: dentro del iframe forzaría el scrollHeight a
+  // todo el viewport y aparecería la barra de scroll siempre.
+  // El fondo lo pinta body.pared-page, no este wrapper.
+  // display: flow-root evita que los márgenes del figure escapen
+  // del wrapper y la medición para postMessage quede corta.
+  box-sizing: border-box;
+  display: flow-root;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(1rem, 3vw, 2.5rem);
+  color: #000;      // negro puro: maximo contraste sobre el tapizado
+}
+
+.pared-detalle {
+  margin: 0 auto;
+  max-width: MIN(94vw, 760px);
+  text-align: center;
+
+  .pared-detalle-marco {
+    display: inline-block;
+    max-width: 100%;
+    // Tamaño mínimo garantizado: las imágenes son externas y
+    // mientras cargan (o si fallan) el marco no se colapsa a nada,
+    // que era la razón por la que a veces el detalle aparecía sin
+    // marco. El passe-partout beige hace de espacio reservado.
+    min-width: MIN(70vw, 340px);
+    min-height: 220px;
+
+    img {
+      max-height: 56vh;   // deja lugar para la info sin scroll
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+}
+
+.pared-detalle-meta {
+  // IMPORTANTE: el tema pinta TODOS los figcaption con opacity:0.5.
+  // Como la info del cuadro vive en un figcaption, quedaba gris
+  // (negro al 50%) pase lo que pasara con el color. Se anula acá.
+  opacity: 1;
+  margin-top: clamp(1.4rem, 4vh, 2.4rem);
+  // SIN text-shadow: un halo con blur alrededor de trazos finos
+  // monospace escarcha las letras y se ven grises. El negro sobre
+  // el beige ya da contraste sobrado solo.
+
+  .pared-detalle-titulo {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: bold;
+  }
+
+  .pared-detalle-linea {
+    margin: 0.35rem 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.65rem;
+    font-size: 1.08rem;
+
+    .pared-detalle-autor {
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: bold;
+    }
+
+    .pared-detalle-separador { opacity: 0.5; }
+
+    time { opacity: 1; }
+  }
+
+  .pared-detalle-descripcion {
+    margin: 1rem auto 0;
+    max-width: 58ch;
+    font-size: 1.08rem;
+    line-height: 1.65;
+    font-style: italic;
+  }
+}
+

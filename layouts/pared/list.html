@@ -1,0 +1,131 @@
+{{ define "main" }}
+{{- /*
+  ============================================================
+  LAYOUT: layouts/pared/list.html
+  ============================================================
+  Página "la pared": galería de dibujos colgados de forma
+  desordenada sobre un tapizado antiguo que cubre toda la página.
+
+  COMO FUNCIONA:
+  - Cada dibujo es una página hija de content/pared/ cuyo front
+    matter define imagen, marco y (opcionalmente) inclinación y
+    ancho. Ver instrucciones en content/pared/_index.md.
+  - La pared CRECE HACIA ABAJO sola a medida que se agregan
+    dibujos: es un contenedor flex que acomoda los cuadros en
+    filas naturales, sin superponerse nunca.
+  - El "desorden" sale de variaciones automáticas por posición
+    (ancho, inclinación y corrimiento vertical ciclan entre
+    varios valores), así no hay que calcular posiciones a mano.
+  - Los dibujos se muestran del MÁS NUEVO al más viejo.
+  - Click en un cuadro -> modal oscurecido con un iframe que
+    carga layouts/pared/single.html (detalle minimalista).
+
+  MANTENIMIENTO:
+  - Para agregar dibujos NO editar este archivo: crear un .md
+    nuevo en content/pared/.
+  - Estilos: assets/css/main.scss, sección "LA PARED".
+  ============================================================
+*/ -}}
+
+<div class="pared-pagina" style="--tapizado: url('{{ "img/tapizado.svg" | relURL }}');">
+
+    <a class="pared-volver" href="{{ "" | relURL }}">← volver al inicio</a>
+
+    <h1>{{ .Title }}</h1>
+
+    {{ .Content }}
+
+    <div class="pared-wall">
+        {{- /* Ciclos de variación: dan el desorden sin cálculos manuales */ -}}
+        {{- $anchos := slice 24 19 26 21 23 18 -}}
+        {{- $rots   := slice "-3" "2.5" "-1.5" "3" "-2" "1.5" -}}
+        {{- $bajos  := slice 0 38 12 46 24 8 -}}
+
+        {{- range $i, $cuadro := .Pages.ByDate.Reverse }}
+        <button type="button"
+                class="pared-cuadro marco-{{ $cuadro.Params.frame | default "clasico" }}"
+                style="width: {{ $cuadro.Params.width | default (index $anchos (mod $i (len $anchos))) }}%;
+                       margin-top: {{ index $bajos (mod $i (len $bajos)) }}px;
+                       --rot: {{ $cuadro.Params.rotate | default (index $rots (mod $i (len $rots))) }}deg;"
+                data-url="{{ $cuadro.RelPermalink }}"
+                aria-label="Ver {{ $cuadro.Title }} en detalle"
+                title="{{ $cuadro.Title }}">
+            <img src="{{ $cuadro.Params.image }}"
+                 alt="{{ $cuadro.Title }}"
+                 loading="lazy"
+                 draggable="false">
+        </button>
+        {{- end }}
+    </div>
+
+</div>
+
+{{- /* Modal oscurecido con el iframe del detalle. Sin caja blanca:
+       el detalle flota sobre el fondo oscuro. */ -}}
+<div class="pared-modal" id="pared-modal" role="dialog" aria-modal="true" aria-label="Detalle del dibujo">
+    <button type="button" class="pared-modal-cerrar" id="pared-modal-cerrar" aria-label="Cerrar">&times;</button>
+    <iframe class="pared-modal-iframe" id="pared-modal-iframe" src="about:blank" title="Detalle del dibujo"></iframe>
+</div>
+
+<script>
+(function () {
+    var modal = document.getElementById("pared-modal");
+    var iframe = document.getElementById("pared-modal-iframe");
+    var cerrarBtn = document.getElementById("pared-modal-cerrar");
+
+    function abrir(url) {
+        iframe.style.height = "";
+        iframe.src = url;
+        modal.classList.add("pared-modal-abierto");
+        document.body.style.overflow = "hidden";
+    }
+
+    function cerrar() {
+        modal.classList.remove("pared-modal-abierto");
+        document.body.style.overflow = "";
+        // Se limpia el iframe recién cuando terminó la transición,
+        // para que no se vea el contenido desaparecer de golpe.
+        // Si mientras tanto se reabrió otro cuadro, no se toca:
+        // sin esta guarda, cerrar y reabrir rápido borraba el
+        // iframe recién cargado (carrera con el setTimeout).
+        setTimeout(function () {
+            if (!modal.classList.contains("pared-modal-abierto")) {
+                iframe.src = "about:blank";
+            }
+        }, 200);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll(".pared-cuadro"), function (cuadro) {
+        cuadro.addEventListener("click", function () { abrir(cuadro.dataset.url); });
+    });
+
+    cerrarBtn.addEventListener("click", cerrar);
+
+    // Click en el fondo oscuro también cierra
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) cerrar();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("pared-modal-abierto")) cerrar();
+    });
+
+    // El detalle avisa su altura real y el iframe se ajusta solo,
+    // así nunca aparece la barra de scroll interna: si la altura
+    // pedida entra, el iframe mide exacto y no hay overflow; solo
+    // si el contenido es más alto que la pantalla se deja scrollear
+    // adentro (comportamiento por defecto del iframe). OJO: no usar
+    // style.overflowY en el elemento iframe, ahí no hace nada.
+    window.addEventListener("message", function (e) {
+        if (e.data && e.data.tipo === "pared-alto") {
+            var tope = Math.round(window.innerHeight * 0.92);
+            var alto = Math.max(Math.min(e.data.alto, tope), 120);
+            if (iframe.style.height !== alto + "px") {
+                iframe.style.height = alto + "px";
+            }
+        }
+    });
+})();
+</script>
+
+{{ end }}

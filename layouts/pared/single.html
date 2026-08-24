@@ -1,0 +1,79 @@
+{{ define "main" }}
+{{- /*
+  ============================================================
+  LAYOUT: layouts/pared/single.html
+  ============================================================
+  Detalle de un dibujo de "la pared". Se carga dentro del iframe
+  del modal de layouts/pared/list.html y también funciona como
+  página suelta si alguien comparte el link directo.
+
+  DISEÑO:
+  - Minimalista, tipo museo: el cuadro con su marco antiguo y la
+    información abajo (título grande, autor, fecha del dibujo y
+    descripción). Tipografía más grande que el resto del sitio.
+  - Fondo: el mismo tapizado de la pared, con tinta sepia para la
+    información. Sin footer.
+  - Sin barra de scroll: la página avisa su altura real al iframe
+    vía postMessage y el modal la ajusta sola. Solo si el contenido
+    no entra (pantallas muy bajas) se habilita el scroll interno.
+
+  El front matter de cada dibujo está documentado en
+  content/pared/_index.md. Estilos: assets/css/main.scss ("LA PARED").
+  ============================================================
+*/ -}}
+
+<div class="pared-detalle-pagina">
+    <figure class="pared-detalle">
+        {{ with .Params.image }}
+        <span class="pared-detalle-marco marco-{{ $.Params.frame | default "clasico" }}">
+            <img src="{{ . }}" alt="{{ $.Title }}" draggable="false">
+        </span>
+        {{ end }}
+        <figcaption class="pared-detalle-meta">
+            <h1 class="pared-detalle-titulo">{{ .Title }}</h1>
+            <p class="pared-detalle-linea">
+                <span class="pared-detalle-autor">{{ .Params.author | default "Anónimo" }}</span>
+                <span class="pared-detalle-separador" aria-hidden="true">·</span>
+                <time datetime="{{ .Date }}">{{ .Date.Format "02/01/2006" }}</time>
+            </p>
+            {{ with .Params.description }}
+            <p class="pared-detalle-descripcion">{{ . }}</p>
+            {{ end }}
+        </figcaption>
+    </figure>
+</div>
+
+<script>
+(function () {
+    // Avisa al iframe padre cuánto mide el contenido para que el
+    // modal ajuste la altura del iframe y no haya scrollbar.
+    //
+    // Se mide el rectángulo del wrapper y NO documentElement
+    // .scrollHeight: ese valor tiene como piso la altura del
+    // viewport del iframe, así que un cuadro chico nunca podría
+    // encoger el iframe (quedaría siempre enorme).
+    function medir() {
+        var w = document.querySelector(".pared-detalle-pagina");
+        return Math.max(Math.ceil(w.getBoundingClientRect().height), 60);
+    }
+    function enviar() {
+        parent.postMessage({ tipo: "pared-alto", alto: medir() }, "*");
+    }
+
+    enviar();                                   // primer ajuste ya mismo
+    window.addEventListener("load", enviar);
+    window.addEventListener("resize", enviar);
+
+    // Las imágenes son externas y pueden terminar de cargar después:
+    // se reenvía la altura cada vez que una termina.
+    Array.prototype.forEach.call(document.images, function (img) {
+        img.addEventListener("load", enviar);
+    });
+
+    if ("ResizeObserver" in window) {
+        new ResizeObserver(enviar).observe(document.body);
+    }
+})();
+</script>
+
+{{ end }}
