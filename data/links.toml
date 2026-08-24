@@ -41,3 +41,8 @@ description = "Blog con mucha antiguedad y actividad."
 title = "thingspool.net"
 url   = "https://thingspool.net/"
 description = "Gamedev, web y matematica."
+
+[[links]]
+title = "lazyfoo.net"
+url   = "https://lazyfoo.net/tutorials/SDL/index.php"
+description = "Tutoriales de Gamedev con SDL y C++."
