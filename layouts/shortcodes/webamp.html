@@ -1,0 +1,277 @@
+{{/*
+  ============================================================
+  Shortcode: webamp.html
+  ============================================================
+  Descripción: Embebe un reproductor de música estilo Winamp 2
+  (Webamp, https://webamp.org) en cualquier post o página.
+  Usa la skin clásica original (viene incluida en la librería) y
+  arranca en "modo doble" (la ventana principal se ve al doble,
+  550x232, como el Ctrl+D del Winamp original; se puede volver a
+  tamaño normal desde el menú contextual). Por defecto muestra
+  solo la ventana principal. Con vis="true" agrega la
+  visualización Milkdrop abierta debajo (ver PARÁMETROS).
+  Pensado para estar embebido: las ventanas NO se pueden arrastrar
+  y la principal NO se puede cerrar. El playlist y el equalizador
+  se abren desde el menú contextual (click derecho).
+
+  La librería se carga por CDN (unpkg) como módulo ES, igual que
+  Mermaid en head.html, así que SOLO pesa en las páginas que usan
+  este shortcode. No requiere npm ni build steps. Pesos aproximados
+  (gzip): bundle liviano ~300KB, bundle con Milkdrop ~520KB.
+
+  ============================================================
+  FORMATO DE PISTAS
+  ============================================================
+  Las pistas van en el cuerpo del shortcode, una por línea,
+  separando los campos con pipes (|):
+
+    URL | Artista | Título | Duración en segundos
+
+  Solo la URL es obligatoria. Artista/Título son opcionales
+  (si faltan, Webamp lee los tags ID3 del MP3, pero tarda un
+  poco más en mostrarlos). La duración también es opcional y
+  ayuda a que el player muestre el tiempo sin descargar el
+  archivo. Se permiten líneas vacías entre medio.
+
+  ============================================================
+  HOSTING DE LOS MP3s (MUY IMPORTANTE - CORS)
+  ============================================================
+  Webamp descarga los archivos de audio desde JavaScript, por lo
+  que el host DEBE enviar el header CORS:
+
+      Access-Control-Allow-Origin: *
+
+  Si el host no lo manda, el audio NO reproduce (error silencioso
+  o de red en consola). Hosts verificados que funcionan:
+
+  1) Internet Archive (RECOMENDADO, el más simple):
+     - Crear cuenta gratis en https://archive.org
+     - Botón "Upload" -> subir los MP3 -> publicar el item
+     - La URL directa queda como:
+         https://archive.org/download/NOMBRE-DEL-ITEM/cancion.mp3
+     - Sirve CORS (*) confirmado. Es el caso de uso oficial de
+       Webamp (el Internet Archive lo usa para previsualizar audio).
+     - Contra: a veces va lento o tira errores temporales (503).
+       Reintentar más tarde, no es culpa del blog.
+
+  2) Repo de GitHub + jsDelivr (alternativa rápida, tipo CDN):
+     - Subir los MP3s a un repo público (ej. TLB-music)
+     - Hotlink con:
+         https://cdn.jsdelivr.net/gh/USUARIO/REPO@main/cancion.mp3
+     - CDN global con caché, CORS (*), límite ~20MB por archivo.
+
+  3) raw.githubusercontent.com (mismo repo, sin límite de 20MB):
+         https://raw.githubusercontent.com/USUARIO/REPO/main/cancion.mp3
+     - CORS (*), pero sin caché de CDN.
+
+  NO funcionan: SoundHelix y la mayoría de hosts de demos
+  (no mandan CORS), ni YouTube/SoundCloud (no exponen el MP3).
+
+  ============================================================
+  PARÁMETROS
+  ============================================================
+  - vis (opcional): habilita la visualización Milkdrop (los
+    gráficos psicodélicos clásicos). Valores válidos:
+        vis="true"      (o vis="milkdrop", es lo mismo)
+
+    Sin el parámetro NO se carga la visualización y se usa el
+    bundle liviano (~300KB). Con vis="true" se importa el bundle
+    "webamp/butterchurn" (~520KB gzip) que incluye Butterchurn
+    (la reimplementación WebGL de Milkdrop 2) y los presets por
+    defecto. La ventana de visualización arranca abierta debajo
+    del player.
+
+    Recomendación: usarlo solo en los posts donde quieras el
+    efecto, para no cargar el bundle pesado al resto del blog.
+
+  ============================================================
+  EJEMPLOS DE USO EN ARCHIVOS MARKDOWN (.md)
+  ============================================================
+
+  1) Playlist completo:
+
+    {{< webamp >}}
+      https://archive.org/download/mi-item/cancion1.mp3 | Soda Stereo | De Música Ligera | 224
+      https://archive.org/download/mi-item/cancion2.mp3 | Charly García | Demoliendo Hoteles
+
+      https://archive.org/download/mi-item/cancion3.mp3 | Virus | Amor Descartable | 197
+    {{< /webamp >}}
+
+  2) Una sola pista, sin metadatos (lee los ID3 del archivo):
+
+    {{< webamp >}}
+      https://archive.org/download/mi-item/lama.mp3
+    {{< /webamp >}}
+
+  3) Playlist con visualización Milkdrop (ver PARÁMETROS):
+
+    {{< webamp vis="true" >}}
+      https://archive.org/download/mi-item/cancion1.mp3 | Soda Stereo | De Música Ligera | 224
+      https://archive.org/download/mi-item/cancion2.mp3 | Charly García | Demoliendo Hoteles
+    {{< /webamp >}}
+
+  4) Varias instancias en la misma página (cada una tiene su ID
+     y su propio player, no hace falta configurar nada):
+
+    {{< webamp >}} ...pistas A... {{< /webamp >}}
+    {{< webamp >}} ...pistas B... {{< /webamp >}}
+
+  ============================================================
+  NOTAS CONOCIDAS (NO BUGS)
+  ============================================================
+  - Autoplay: los navegadores bloquean el autoplay con sonido,
+    el visitante tiene que apretar play. Así funciona Webamp.
+  - Modo doble: el player arranca al doble de tamaño (550x232,
+    como el Ctrl+D del Winamp original). El visitante puede
+    volverlo a tamaño normal desde el menú contextual (opción
+    "Double size mode"). Milkdrop no se duplica nunca, igual que
+    en el Winamp original.
+  - Móvil: Webamp es una app de escritorio reimplementada y en
+    modo doble mide 550px de ancho; en pantallas chicas hay que
+    scrollear horizontal o achicarlo con el modo normal.
+  - Ventanas fijas: ni la principal ni la de Milkdrop se pueden
+    arrastrar (se cortan los eventos de drag en fase captura, los
+    botones siguen funcionando). Tampoco se puede cerrar la
+    ventana principal (API oficial onWillClose con cancel()).
+    Si el visitante recarga, todo vuelve a su lugar.
+  - Milkdrop: requiere WebGL (todos los navegadores modernos lo
+    soportan; IE no). Desde Webamp v2.2 los presets corren en
+    WebAssembly sandboxeado. En móviles viejos puede andar lento,
+    es mucha GPU para un post de blog, pero es hermoso.
+  ============================================================
+*/ -}}
+
+{{- /* Parámetro vis: "true" o "milkdrop" habilitan la visualización. */ -}}
+{{- $visParam := .Get "vis" | default "" | lower -}}
+{{- $vis := or (eq $visParam "true") (eq $visParam "milkdrop") -}}
+
+{{- /* Bundle según modo: con vis se usa el que incluye Butterchurn. */ -}}
+{{- $bundle := "https://unpkg.com/webamp@^2" -}}
+{{- if $vis -}}
+  {{- $bundle = "https://unpkg.com/webamp@^2/butterchurn" -}}
+{{- end -}}
+
+{{- /* Se parsean las pistas del body: "URL | Artista | Título | Duración". */ -}}
+{{- $tracks := slice -}}
+{{- $inner := trim .Inner "\r\n\t " -}}
+{{- range $line := split $inner "\n" -}}
+  {{- $line := trim $line " \t\r" -}}
+  {{- $parts := split $line "|" -}}
+  {{- $url := "" -}}
+  {{- $artist := "" -}}
+  {{- $title := "" -}}
+  {{- $duration := 0 -}}
+  {{- if gt (len $parts) 0 -}}{{- $url = trim (index $parts 0) " \t" -}}{{- end -}}
+  {{- if gt (len $parts) 1 -}}{{- $artist = trim (index $parts 1) " \t" -}}{{- end -}}
+  {{- if gt (len $parts) 2 -}}{{- $title = trim (index $parts 2) " \t" -}}{{- end -}}
+  {{- if gt (len $parts) 3 -}}{{- $duration = trim (index $parts 3) " \t" | int -}}{{- end -}}
+  {{- if and (ne $line "") (ne $url "") -}}
+    {{- $track := dict "url" $url -}}
+    {{- /* metaData solo si hay algo cargado, si no Webamp lee los ID3. */ -}}
+    {{- $meta := dict -}}
+    {{- with $artist -}}{{- $meta = merge $meta (dict "artist" $artist) -}}{{- end -}}
+    {{- with $title -}}{{- $meta = merge $meta (dict "title" $title) -}}{{- end -}}
+    {{- with $meta -}}{{- $track = merge $track (dict "metaData" $meta) -}}{{- end -}}
+    {{- with $duration -}}{{- $track = merge $track (dict "duration" $duration) -}}{{- end -}}
+    {{- /* OJO: en Hugo el append va al revés que en Go: valores primero, colección al final. */ -}}
+    {{- $tracks = append $track $tracks -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Estilos: autocontenidos para no tocar assets/css/main.scss. */ -}}
+{{- /*
+  Contenedores calzados al tamaño real de las ventanas (fuente:
+  constants.ts y selectors.ts de Webamp: ventana principal
+  WINDOW_WIDTH=275 x WINDOW_HEIGHT=116, y en modo doble se
+  multiplica x2 -> 550x232. Milkdrop siempre 275x116).
+*/ -}}
+<style>
+  .webamp-container {
+    position: relative;
+    /* Ventana principal en modo doble (550x232) + aire mínimo */
+    height: 240px;
+    width: 550px;
+    max-width: 100%;
+    margin: 2rem auto;
+  }
+  .webamp-msg {
+    background: #000;
+    color: #00e800;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+    padding: 0.75rem 1rem;
+    border: 2px solid #292929;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 640px;
+  }
+</style>
+
+{{- if not $tracks -}}
+  <div class="webamp-msg">
+    webamp: no se especificaron pistas. Formato esperado:<br>
+    URL | Artista | Titulo | Duracion
+  </div>
+{{- else -}}
+<div id="webamp-{{ .Ordinal }}" class="webamp-container"{{ with $vis }} style="height: 360px"{{ end }}></div>
+<script type="module">
+  // Con vis="true" este bundle incluye Butterchurn (Milkdrop) y presets.
+  const webampBundle = {{ $bundle }};
+  const Webamp = (await import(webampBundle)).default;
+
+  const container = document.getElementById("webamp-{{ .Ordinal }}");
+
+  // Ventanas fijas: se cortan los eventos que inician el arrastre.
+  // Webamp solo empieza a arrastrar si el mousedown cae en un
+  // elemento con la clase "draggable" (chequeo exacto de e.target en
+  // WindowManager), asi que cortar esos eventos en fase captura no
+  // afecta a los botones (que son hijos sin la clase). Se registran
+  // ANTES del render para cubrir desde el primer frame.
+  for (const type of ["mousedown", "touchstart"]) {
+    container.addEventListener(
+      type,
+      (e) => {
+        const target = e.target;
+        if (
+          target instanceof Element &&
+          target.classList.contains("draggable")
+        ) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      },
+      true
+    );
+  }
+
+  try {
+    const webamp = new Webamp({
+      // Pistas parseadas por Hugo. jsonify escapa comillas y < > (seguro),
+      // y safeJS evita que html/template lo envuelva como string en contexto JS.
+      initialTracks: {{ $tracks | jsonify | safeJS }},
+      // Modo doble clásico de Winamp: la ventana principal se ve x2
+      // (550x232). Milkdrop no se duplica, igual que en el original.
+      enableDoubleSizeMode: true,
+      // Ventana principal arriba; con vis se abre Milkdrop debajo.
+      // Playlist y EQ quedan disponibles por menú contextual (click derecho).
+      windowLayout: {
+        main: { position: { top: 0, left: 0 } },
+        {{- with $vis }}
+        milkdrop: { position: { top: 232, left: 0 } },
+        {{- end }}
+      },
+    });
+    // La ventana principal no se puede cerrar: el API oficial
+    // onWillClose recibe un cancel() que aborta el cierre.
+    webamp.onWillClose((cancel) => cancel());
+    // A diferencia de renderWhenReady, renderInto deja el root DENTRO
+    // del contenedor (Webamp v2.2+), así el bloqueo de arrastre queda
+    // scopeado a esta instancia y no dependemos del id global #webamp.
+    await webamp.renderInto(container);
+  } catch (err) {
+    container.innerHTML =
+      '<div class="webamp-msg">webamp: error al cargar el reproductor.<br>Revisá la consola (F12) y que las URLs tengan CORS.</div>';
+    console.error("Webamp:", err);
+  }
+</script>
+{{- end -}}
