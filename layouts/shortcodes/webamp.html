@@ -49,6 +49,14 @@
      - Botón "Upload" -> subir los MP3 -> publicar el item
      - La URL directa queda como:
          https://archive.org/download/NOMBRE-DEL-ITEM/cancion.mp3
+     - ATENCIÓN con dos trampas típicas:
+       a) La URL de la página del item es /details/, y esa NO sirve
+          (devuelve HTML, no audio). Para el player siempre usar
+          /download/.
+       b) Los espacios en nombres de archivo van como %20 en la URL,
+          NO como + (en rutas, el + es un signo más literal y da 404).
+          Ej: "01. Breathe In.mp3" ->
+              https://archive.org/download/ITEM/01.%20Breathe%20In.mp3
      - Sirve CORS (*) confirmado. Es el caso de uso oficial de
        Webamp (el Internet Archive lo usa para previsualizar audio).
      - Contra: a veces va lento o tira errores temporales (503).
@@ -124,8 +132,9 @@
   - Modo doble: el player arranca al doble de tamaño (550x232,
     como el Ctrl+D del Winamp original). El visitante puede
     volverlo a tamaño normal desde el menú contextual (opción
-    "Double size mode"). Milkdrop no se duplica nunca, igual que
-    en el Winamp original.
+    "Double size mode"). Milkdrop no soporta modo doble, pero lo
+    dimensionamos con sprites extra para que calce a la misma
+    medida (550x232) y quede alineado con la principal.
   - Móvil: Webamp es una app de escritorio reimplementada y en
     modo doble mide 550px de ancho; en pantallas chicas hay que
     scrollear horizontal o achicarlo con el modo normal.
@@ -183,7 +192,8 @@
   Contenedores calzados al tamaño real de las ventanas (fuente:
   constants.ts y selectors.ts de Webamp: ventana principal
   WINDOW_WIDTH=275 x WINDOW_HEIGHT=116, y en modo doble se
-  multiplica x2 -> 550x232. Milkdrop siempre 275x116).
+  multiplica x2 -> 550x232. Milkdrop se agranda con sprites extra
+  (extraWidth=11, extraHeight=4) hasta calzar los mismos 550x232).
 */ -}}
 <style>
   .webamp-container {
@@ -213,7 +223,7 @@
     URL | Artista | Titulo | Duracion
   </div>
 {{- else -}}
-<div id="webamp-{{ .Ordinal }}" class="webamp-container"{{ with $vis }} style="height: 360px"{{ end }}></div>
+<div id="webamp-{{ .Ordinal }}" class="webamp-container"{{ with $vis }} style="height: 472px"{{ end }}></div>
 <script type="module">
   // Con vis="true" este bundle incluye Butterchurn (Milkdrop) y presets.
   const webampBundle = {{ $bundle }};
@@ -257,7 +267,16 @@
       windowLayout: {
         main: { position: { top: 0, left: 0 } },
         {{- with $vis }}
-        milkdrop: { position: { top: 232, left: 0 } },
+        // Milkdrop no soporta modo doble (canDouble: false en Webamp),
+        // pero se puede agrandar por "sprites" extra. Con la fórmula
+        // de Webamp (275 + extraWidth*25 x 116 + extraHeight*29),
+        // extraWidth=11 y extraHeight=4 dan 550x232 exactos, la misma
+        // medida que la ventana principal en modo doble. El canvas de
+        // Butterchurn se re-escala solo a ese tamaño.
+        milkdrop: {
+          position: { top: 232, left: 0 },
+          size: { extraWidth: 11, extraHeight: 4 },
+        },
         {{- end }}
       },
     });
