@@ -4,7 +4,7 @@ draft = false
 title = 'Pylot-The Carbon Ghost'
 author = 'Luca'
 keywords = ["Music", "New LP"]
-categories = ["Music"]
+categories = ["Musica"]
 +++
 
 

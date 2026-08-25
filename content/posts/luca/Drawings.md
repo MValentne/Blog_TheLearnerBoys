@@ -4,7 +4,7 @@ draft = false
 title = 'Little Drawings'
 author = 'Luca'
 keywords = ["sketch"]
-categories = ["Art"]
+categories = ["Arte"]
 +++
 
 
