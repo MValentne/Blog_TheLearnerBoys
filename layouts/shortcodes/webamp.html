@@ -197,12 +197,12 @@
 */ -}}
 <style>
   .webamp-container {
+    --webamp-h: 240px;
     position: relative;
-    /* Ventana principal en modo doble (550x232) + aire mínimo */
-    height: 240px;
+    height: var(--webamp-h);
     width: 550px;
-    max-width: 100%;
-    margin: 2rem auto;
+    margin: 2rem 0;
+    transform-origin: top center;
   }
   .webamp-msg {
     background: #000;
@@ -215,6 +215,12 @@
     margin: 2rem auto;
     max-width: 640px;
   }
+  @media (max-width: 615px) {
+    .webamp-container {
+      transform: scale(calc((100vw - 4rem) / 550px));
+      margin-bottom: calc(var(--webamp-h) * ((100vw - 4rem) / 550px - 1) + 2rem);
+    }
+  }
 </style>
 
 {{- if not $tracks -}}
@@ -223,7 +229,11 @@
     URL | Artista | Titulo | Duracion
   </div>
 {{- else -}}
-<div id="webamp-{{ .Ordinal }}" class="webamp-container"{{ with $vis }} style="height: 472px"{{ end }}></div>
+<div style="overflow-x: hidden;">
+  <div style="display: flex; justify-content: center;">
+    <div id="webamp-{{ .Ordinal }}" class="webamp-container"{{ with $vis }} style="--webamp-h: 472px"{{ end }}></div>
+  </div>
+</div>
 <script type="module">
   // Con vis="true" este bundle incluye Butterchurn (Milkdrop) y presets.
   const webampBundle = {{ $bundle }};
