@@ -22,16 +22,28 @@
   ============================================================
   FORMATO DE PISTAS
   ============================================================
-  Las pistas van en el cuerpo del shortcode, una por línea,
-  separando los campos con pipes (|):
+  Las pistas van en el cuerpo del shortcode, una por línea.
+  Se aceptan dos formatos:
 
-    URL | Artista | Título | Duración en segundos
+  1) Solo URLs (más fácil, recomendado para copiar/pegar):
+
+      https://archive.org/download/ITEM/cancion1.mp3
+      https://archive.org/download/ITEM/cancion2.mp3
+
+  2) URL + metadatos (opcional, separados con pipes |):
+
+      URL | Artista | Título | Duración en segundos
 
   Solo la URL es obligatoria. Artista/Título son opcionales
   (si faltan, Webamp lee los tags ID3 del MP3, pero tarda un
   poco más en mostrarlos). La duración también es opcional y
   ayuda a que el player muestre el tiempo sin descargar el
   archivo. Se permiten líneas vacías entre medio.
+
+  AUTO-FIX DE URLs:
+  - archive.org/details/ se convierte automáticamente a /download/
+  - Espacios en URLs se reemplazan por %20
+  - Query params ?download=true se eliminan
 
   ============================================================
   HOSTING DE LOS MP3s (MUY IMPORTANTE - CORS)
@@ -171,6 +183,13 @@
   {{- $title := "" -}}
   {{- $duration := 0 -}}
   {{- if gt (len $parts) 0 -}}{{- $url = trim (index $parts 0) " \t" -}}{{- end -}}
+  {{- /* Auto-fix de URLs: archive.org /details/ -> /download/, espacios -> %20, query params innecesarios. */ -}}
+  {{- if in $url "archive.org/details/" -}}
+    {{- $url = replace $url "archive.org/details/" "archive.org/download/" -}}
+  {{- end -}}
+  {{- $url = replace $url " " "%20" -}}
+  {{- $url = replaceRE "\\?download=true$" "" $url -}}
+  {{- $url = replaceRE "\\?download=true(&|$)" "$1" $url -}}
   {{- if gt (len $parts) 1 -}}{{- $artist = trim (index $parts 1) " \t" -}}{{- end -}}
   {{- if gt (len $parts) 2 -}}{{- $title = trim (index $parts 2) " \t" -}}{{- end -}}
   {{- if gt (len $parts) 3 -}}{{- $duration = trim (index $parts 3) " \t" | int -}}{{- end -}}
