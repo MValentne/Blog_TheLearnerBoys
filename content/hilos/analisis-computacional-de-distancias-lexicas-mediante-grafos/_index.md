@@ -1,6 +1,6 @@
 +++
 date = '2026-08-27T23:07:59-03:00'
-draft = true
+draft = false
 title = 'Analisis Computacional De Distancias Lexicas Mediante Grafos'
 author = 'Valen'
 keywords = ["grafos", "levenshtein", "investigacion"]
